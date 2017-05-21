@@ -6,7 +6,7 @@
 package view;
 
 import javax.swing.JFrame;
-
+//prueba
 /**
  *
  * @author Ivette
