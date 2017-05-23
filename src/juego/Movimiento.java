@@ -27,50 +27,40 @@ public class Movimiento extends javax.swing.JFrame {
     /**
      * Creates new form Movimiento
      */
+    //
+    //este es el numero que devuelve el dado despues de haber sido girado
     static int numero = 0;
-    private Image fondo;
     
+    //posicion x,y del peon 1 en el tablero
     int x1;
     int y1;
+    
+    //posicion x,y del peon 2 en el tablero
     int x2;
     int y2;
+    
+    //posicion x,y del peon 3 en el tablero
     int x3;
     int y3;
     
-    
-    int casilla = 0;
-    
+    //posiciones logicas de los peones contra el tablero, nos sirve para comparar contra las casillas 
     int pos1 = 0;
     int pos2 = 0;
     int pos3 = 0;
     
-    int jug1 = 500;
-    int jug2 = 500;
-    int jug3 = 500;
+    //variables jug, que sirven para mostrar el saldo de los jugadores
+    double jug1 = 500;
+    double jug2 = 500;
+    double jug3 = 500;
     
-    int casilla1 = 0;
-    int casilla2 = 0;
-    int casilla3 = 0;
-    int casilla4 = 0;
-    int casilla5 = 0;
-    int casilla6 = 0;
-    int casilla7 = 0;
-    int casilla8 = 0;
-    int casilla9 = 0;
-    int casilla10 = 0;
-    int casilla11 = 0;
-    int casilla12 = 0;
-    int casilla13 = 0;
-    int casilla14 = 0;
-    int casilla15 = 0;
-    int casilla16 = 0;
-    int casilla17 = 0;
-    int casilla18 = 0;
-    int casilla19 = 0;
-    int casilla20 = 0;
-    int casilla21 = 0;
+    //casillas logicas del tablero, valor o representa que no ha sido comprada, 1 que le pertenece al jugador 1, 2 que le pertenece al jugador 2, y 3 que le pertenece al jugador 3
+    int casillas[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     
     
+    //suma el valor de las propiedades adquiridas por cada jugador, nos sirve para obtener el impuesto en las casillas SAT
+    int propiedad1 = 0;
+    int propiedad2 = 0;
+    int propiedad3 = 0;
     
     
     
@@ -156,6 +146,7 @@ public class Movimiento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //funcion que hace controlar al peon1, sobre todo el tablero con las flechas del teclado, solo sirvio de guia para determinar las posiciones
     private void dadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadosKeyPressed
         x1 = peon1.getX();
         y1 = peon1.getY();
@@ -171,8 +162,11 @@ public class Movimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dadosKeyPressed
 
+    
+    
+   //del boton tirar jugador 1 
     private void tirar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tirar1ActionPerformed
-        dados.enable(true);
+            dados.enable(true);
             dados.setVisible(true);// TODO add your handling code here:
 
             int velocidad = 2;
@@ -182,6 +176,8 @@ public class Movimiento extends javax.swing.JFrame {
         
         int velmil = velocidad * 1000;
         
+        
+        //actualiza las posiciones del peon1
         x1 = peon1.getX();
         y1 = peon1.getY();
         
@@ -194,9 +190,12 @@ public class Movimiento extends javax.swing.JFrame {
                
                 dados.enable(false);
                 dados.setVisible(false);
-
+                
+                
+                //la variable numero obtiene el valor retornado del dado, para luego escalar las posiciones
                 numero = girar();
                 
+                //validacion para avanzar deacuerdo a las casillas
                 for(int x = 1; numero>=x; x++)
                 {
                         pos1 = pos1 + 1;
@@ -217,383 +216,326 @@ public class Movimiento extends javax.swing.JFrame {
                         pasoizq();
                             if(pos1 == 22)
                             {
+                                //cuando de una vuelta completa se le asigna nuevamente 0 que es el inicio, y a su saldo se le suman 100 segun instrucciones del docto.
                             pos1 = 0;
+                            jug1 = jug1 + 100;
                             }
                         }
                 }
-                        
-                        if(pos1 == 1 && casilla1 == 0)
+                        //empieza la validacion de la posicion actual del peon contra el estado de las casillas
+                        //validacion de posiciones contra el estado "banco/ no comprado"
+                
+                        if(pos1 == 1 && casillas[1] == 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=130)
                             {
-                                jug1 = jug1 - 130;
-                                casilla1 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 130;
+                                    casillas[1] = 1;
+                                    propiedad1 = propiedad1 + 130;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
-                        if(pos1 == 2 && casilla2 == 0)
+                        if(pos1 == 2 && casillas[2] == 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=100)
                             {
-                                jug1 = jug1 - 100;
-                                casilla2 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 100;
+                                    casillas[2] = 1;
+                                    propiedad1 = propiedad1 + 100;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
-                        if(pos1 == 3 && casilla3 == 0)
+                        if(pos1 == 3 && casillas[3] == 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=90)
                             {
-                                jug1 = jug1 - 90;
-                                casilla3 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 90;
+                                    casillas[3] = 1;
+                                    propiedad1 = propiedad1 + 90;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        
-                        if(pos1 == 5 && casilla5 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 150;
-                                casilla5 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 6 && casilla6 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 140;
-                                casilla6 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 7 && casilla7 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Peten por Q50.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 50;
-                                casilla7 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 8 && casilla8 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Fegua por Q190.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 190;
-                                casilla8 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 9 && casilla9 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Solola por Q170.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 170;
-                                casilla9 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
                         
-                        if(pos1 == 10 && casilla10 == 0)
+                        if(pos1 == 5 && casillas[5] == 0)
                         {
-                            //impuestos de la SAT, 
+                            if(jug1>=150)
+                            {
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 150;
+                                    casillas[5] = 1;
+                                    propiedad1 = propiedad1 + 150;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }  
+                            }
                         } 
-                        if(pos1 == 11 && casilla11 == 0)
+                        if(pos1 == 6 && casillas[6] == 0)
+                        {
+                            if(jug1>=140)
+                            {
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 140;
+                                    casillas[6] = 1;
+                                    propiedad1 = propiedad1 + 140;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                } 
+                            }
+                        } 
+                        if(pos1 == 7 && casillas[7] == 0)
+                        {
+                            if(jug1>=50)
+                            {
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Peten por Q50.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 50;
+                                    casillas[7]= 1;
+                                    propiedad1 = propiedad1 + 50;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
+                            }
+                        } 
+                        if(pos1 == 8 && casillas[8] == 0)
+                        {
+                            if(jug1>=190)
+                            {
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Fegua por Q190.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 190;
+                                    casillas[8] = 1;
+                                    propiedad1 = propiedad1 + 190;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
+                            }
+                        } 
+                        if(pos1 == 9 && casillas[9] == 0)
+                        {
+                            if(jug1>=170)
+                            {
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Solola por Q170.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 170;
+                                    casillas[9]= 1;
+                                    propiedad1 = propiedad1 + 170;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
+                            }
+                        } 
+                        
+                        if(pos1 == 10 && casillas[10]== 0)
+                        {
+                            double impuesto = propiedad1 * 0.10;
+                            jug1 = jug1 - impuesto;
+                        } 
+                        if(pos1 == 11 && casillas[11] == 0)
                         {
                             //descanzo
                         } 
-                        if(pos1 == 12 && casilla12 == 0)
+                        if(pos1 == 12 && casillas[12]== 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar San Marcos por Q230.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=230)
                             {
-                                jug1 = jug1 - 230;
-                                casilla12 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar San Marcos por Q230.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 230;
+                                    casillas[12] = 1;
+                                    propiedad1 = propiedad1 + 230;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                } 
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
-                        if(pos1 == 13 && casilla13 == 0)
+                        if(pos1 == 13 && casillas[13] == 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Baja Verapaz por Q250.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=250)
                             {
-                                jug1 = jug1 - 250;
-                                casilla13 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Baja Verapaz por Q250.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 250;
+                                    casillas[13]= 1;
+                                    propiedad1 = propiedad1 + 250;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }   
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
-                        if(pos1 == 14 && casilla14 == 0)
+                        if(pos1 == 14 && casillas[14] == 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Empagua por Q175.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=175)
                             {
-                                jug1 = jug1 - 175;
-                                casilla14 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Empagua por Q175.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 175;
+                                    casillas[14] = 1;
+                                    propiedad1 = propiedad1 + 175;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }   
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
                         
-                        if(pos1 == 15 && casilla15 == 0)
+                        if(pos1 == 15 && casillas[15] == 0)
                         {
-                            //coordenadas de la casilla 4  
+                            pasoarriba();
+                            pasoarriba();
+                            pasoarriba();
+                            pasoarriba();
+                            pasoizq();
+                            pasoizq();
+                            pasoizq();
+                            pasoizq();
+                            pasoizq();
+                            pasoizq();
+                            pasoizq();
+                            pos1 = 4;
+                            jug1 = jug1 - 100;
                         } 
-                        if(pos1 == 16 && casilla16 == 0)
+                        if(pos1 == 16 && casillas[16]== 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 140;
-                                casilla6 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
+                            //cupon
                         } 
-                        if(pos1 == 1 && casilla1 == 0)
+                        if(pos1 == 17 && casillas[17]== 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=310)
                             {
-                                jug1 = jug1 - 130;
-                                casilla1 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Santa Rosa por Q310.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 310;
+                                    casillas[17] = 1;
+                                    propiedad1 = propiedad1 + 310;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
-                        if(pos1 == 2 && casilla2 == 0)
+                        if(pos1 == 18 && casillas[18]== 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=270)
                             {
-                                jug1 = jug1 - 100;
-                                casilla2 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Zacapa por Q270.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 270;
+                                    casillas[18] = 1;
+                                    propiedad1 = propiedad1 + 270;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                } 
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
-                        if(pos1 == 3 && casilla3 == 0)
+                        if(pos1 == 19 && casillas[19]== 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=250)
                             {
-                                jug1 = jug1 - 90;
-                                casilla3 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Guatemala por Q250.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 250;
+                                    casillas[19] = 1;
+                                    propiedad1 = propiedad1 + 250;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                } 
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
                         
-                        if(pos1 == 5 && casilla5 == 0)
+                        if(pos1 == 20 && casillas[20]== 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            if(jug1>=390)
                             {
-                                jug1 = jug1 - 150;
-                                casilla5 = 1;
+                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Jutiapa por Q390.00");
+                                if(ax == JOptionPane.YES_OPTION)
+                                {
+                                    jug1 = jug1 - 390;
+                                    casillas[20] = 1;
+                                    propiedad1 = propiedad1 + 390;
+                                }
+                                else if(ax == JOptionPane.NO_OPTION)
+                                {
+                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                                }
                             }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
                         } 
-                        if(pos1 == 6 && casilla6 == 0)
+                        if(pos1 == 21 && casillas[21] == 0)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 140;
-                                casilla6 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 1 && casilla1 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 130;
-                                casilla1 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 2 && casilla2 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 100;
-                                casilla2 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 3 && casilla3 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 90;
-                                casilla3 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
+                            double impuesto = propiedad1 * 0.10;
+                            jug1 = jug1 - impuesto;
                         } 
                         
-                        if(pos1 == 5 && casilla5 == 0)
+                          
+                        for(int i = 1; i<=21; i++)
                         {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
-                            if(ax == JOptionPane.YES_OPTION)
+                            //validacion de posiciones contra el estado "jugador 2"
+                           if(pos1 == i && casillas[i] == 2)
                             {
-                                jug1 = jug1 - 150;
-                                casilla5 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
+                                jug2 = jug2 + 50;
+                            } 
+                           //validacion de posiciones contra el estado "jugador 3"
+                           if(pos1 == i && casillas[i] == 3)
                             {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 6 && casilla6 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 140;
-                                casilla6 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 1 && casilla1 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 130;
-                                casilla1 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 2 && casilla2 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 100;
-                                casilla2 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 3 && casilla3 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 90;
-                                casilla3 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
+                                jug3 = jug3 + 50;
+                            } 
                         
-                        if(pos1 == 5 && casilla5 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 150;
-                                casilla5 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
-                        if(pos1 == 6 && casilla6 == 0)
-                        {
-                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
-                            if(ax == JOptionPane.YES_OPTION)
-                            {
-                                jug1 = jug1 - 140;
-                                casilla6 = 1;
-                            }
-                            else if(ax == JOptionPane.NO_OPTION)
-                            {
-                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                            }    
-                        } 
+                        }
                 
-                
-                
+               System.out.println(jug1);
               }
         };
         
@@ -654,6 +596,7 @@ public class Movimiento extends javax.swing.JFrame {
                             if(pos2 == 22)
                             {
                             pos2 = 0;
+                            jug1 = jug1 + 100;
                             }
                         }
                 }    
@@ -718,6 +661,7 @@ public class Movimiento extends javax.swing.JFrame {
                             if(pos3 == 22)
                             {
                             pos3 = 0;
+                            jug1 = jug1 + 100;
                             }
                         }
                 }    
