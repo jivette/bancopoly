@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.JOptionPane;
 
 
 public class Movimiento extends javax.swing.JFrame {
@@ -29,10 +30,48 @@ public class Movimiento extends javax.swing.JFrame {
     static int numero = 0;
     private Image fondo;
     
-    int x;
-    int y;
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+    int x3;
+    int y3;
+    
     
     int casilla = 0;
+    
+    int pos1 = 0;
+    int pos2 = 0;
+    int pos3 = 0;
+    
+    int jug1 = 500;
+    int jug2 = 500;
+    int jug3 = 500;
+    
+    int casilla1 = 0;
+    int casilla2 = 0;
+    int casilla3 = 0;
+    int casilla4 = 0;
+    int casilla5 = 0;
+    int casilla6 = 0;
+    int casilla7 = 0;
+    int casilla8 = 0;
+    int casilla9 = 0;
+    int casilla10 = 0;
+    int casilla11 = 0;
+    int casilla12 = 0;
+    int casilla13 = 0;
+    int casilla14 = 0;
+    int casilla15 = 0;
+    int casilla16 = 0;
+    int casilla17 = 0;
+    int casilla18 = 0;
+    int casilla19 = 0;
+    int casilla20 = 0;
+    int casilla21 = 0;
+    
+    
+    
     
     
     public Movimiento() {
@@ -51,15 +90,19 @@ public class Movimiento extends javax.swing.JFrame {
 
         peon1 = new javax.swing.JLabel();
         dados = new javax.swing.JLabel();
-        tirar = new javax.swing.JButton();
+        tirar1 = new javax.swing.JButton();
+        peon2 = new javax.swing.JLabel();
+        peon3 = new javax.swing.JLabel();
+        tirar2 = new javax.swing.JButton();
+        tirar3 = new javax.swing.JButton();
         tablero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        peon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/peon1.jpg"))); // NOI18N
+        peon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/peon1.png"))); // NOI18N
         getContentPane().add(peon1);
-        peon1.setBounds(60, 500, 50, 50);
+        peon1.setBounds(50, 470, 70, 40);
 
         dados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/dados.gif"))); // NOI18N
         dados.setText("jLabel3");
@@ -71,14 +114,40 @@ public class Movimiento extends javax.swing.JFrame {
         getContentPane().add(dados);
         dados.setBounds(230, 210, 170, 90);
 
-        tirar.setText("TIRAR");
-        tirar.addActionListener(new java.awt.event.ActionListener() {
+        tirar1.setText("TIRAR PEON 1");
+        tirar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tirarActionPerformed(evt);
+                tirar1ActionPerformed(evt);
             }
         });
-        getContentPane().add(tirar);
-        tirar.setBounds(300, 310, 100, 30);
+        getContentPane().add(tirar1);
+        tirar1.setBounds(300, 310, 120, 30);
+
+        peon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/peon2.png"))); // NOI18N
+        getContentPane().add(peon2);
+        peon2.setBounds(50, 510, 80, 40);
+
+        peon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/peon3.png"))); // NOI18N
+        getContentPane().add(peon3);
+        peon3.setBounds(50, 550, 70, 40);
+
+        tirar2.setText("TIRAR PEON 2");
+        tirar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tirar2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tirar2);
+        tirar2.setBounds(300, 350, 120, 30);
+
+        tirar3.setText("TIRAR PEON 3");
+        tirar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tirar3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tirar3);
+        tirar3.setBounds(300, 390, 120, 30);
 
         tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/bancopoly.jpg"))); // NOI18N
         getContentPane().add(tablero);
@@ -88,21 +157,21 @@ public class Movimiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadosKeyPressed
-        x = peon1.getX();
-        y = peon1.getY();
+        x1 = peon1.getX();
+        y1 = peon1.getY();
         System.out.println(peon1.getLocation());
 
         switch(evt.getExtendedKeyCode())
         {
-            case KeyEvent.VK_UP: peon1.setLocation(x, y-110); break;
-            case KeyEvent.VK_DOWN: peon1.setLocation(x, y+110); break;
-            case KeyEvent.VK_RIGHT: peon1.setLocation(x+110, y); break;
-            case KeyEvent.VK_LEFT: peon1.setLocation(x-110, y); break;
+            case KeyEvent.VK_UP: peon1.setLocation(x1, y1-110); break;
+            case KeyEvent.VK_DOWN: peon1.setLocation(x1, y1+110); break;
+            case KeyEvent.VK_RIGHT: peon1.setLocation(x1+110, y1); break;
+            case KeyEvent.VK_LEFT: peon1.setLocation(x1-110, y1); break;
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_dadosKeyPressed
 
-    private void tirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tirarActionPerformed
+    private void tirar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tirar1ActionPerformed
         dados.enable(true);
             dados.setVisible(true);// TODO add your handling code here:
 
@@ -113,8 +182,8 @@ public class Movimiento extends javax.swing.JFrame {
         
         int velmil = velocidad * 1000;
         
-        x = peon1.getX();
-        y = peon1.getY();
+        x1 = peon1.getX();
+        y1 = peon1.getY();
         
         
         
@@ -126,33 +195,402 @@ public class Movimiento extends javax.swing.JFrame {
                 dados.enable(false);
                 dados.setVisible(false);
 
-                    numero = girar();
+                numero = girar();
                 
-                for(int x = 1; x<=numero; x++)
+                for(int x = 1; numero>=x; x++)
                 {
-                        casilla = casilla + 1;
-                        if(casilla <= 7)
-                        {
-                        pasoder();
-                        }
-                        if(casilla > 7 && casilla <=11)
+                        pos1 = pos1 + 1;
+                        if(pos1 <= 4)
                         {
                         pasoarriba();
                         }
-                        if(casilla >11 && casilla <=18)
+                        if(pos1 > 4 && pos1 <=11)
                         {
-                        pasoizq();
+                        pasoder();
                         }
-                        if(casilla >18 && casilla <=22)
+                        if(pos1 >11 && pos1 <=15)
                         {
                         pasoabajo();
-                            if(casilla == 22)
+                        }
+                        if(pos1 >15 && pos1 <=22)
+                        {
+                        pasoizq();
+                            if(pos1 == 22)
                             {
-                            casilla = 0;
+                            pos1 = 0;
                             }
                         }
-                }    
-            
+                }
+                        
+                        if(pos1 == 1 && casilla1 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 130;
+                                casilla1 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 2 && casilla2 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 100;
+                                casilla2 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 3 && casilla3 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 90;
+                                casilla3 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        
+                        if(pos1 == 5 && casilla5 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 150;
+                                casilla5 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 6 && casilla6 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 140;
+                                casilla6 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 7 && casilla7 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Peten por Q50.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 50;
+                                casilla7 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 8 && casilla8 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Fegua por Q190.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 190;
+                                casilla8 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 9 && casilla9 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Solola por Q170.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 170;
+                                casilla9 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        
+                        if(pos1 == 10 && casilla10 == 0)
+                        {
+                            //impuestos de la SAT, 
+                        } 
+                        if(pos1 == 11 && casilla11 == 0)
+                        {
+                            //descanzo
+                        } 
+                        if(pos1 == 12 && casilla12 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar San Marcos por Q230.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 230;
+                                casilla12 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 13 && casilla13 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Baja Verapaz por Q250.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 250;
+                                casilla13 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 14 && casilla14 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Empagua por Q175.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 175;
+                                casilla14 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        
+                        if(pos1 == 15 && casilla15 == 0)
+                        {
+                            //coordenadas de la casilla 4  
+                        } 
+                        if(pos1 == 16 && casilla16 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 140;
+                                casilla6 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 1 && casilla1 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 130;
+                                casilla1 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 2 && casilla2 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 100;
+                                casilla2 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 3 && casilla3 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 90;
+                                casilla3 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        
+                        if(pos1 == 5 && casilla5 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 150;
+                                casilla5 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 6 && casilla6 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 140;
+                                casilla6 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 1 && casilla1 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 130;
+                                casilla1 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 2 && casilla2 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 100;
+                                casilla2 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 3 && casilla3 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 90;
+                                casilla3 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        
+                        if(pos1 == 5 && casilla5 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 150;
+                                casilla5 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 6 && casilla6 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 140;
+                                casilla6 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 1 && casilla1 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 130;
+                                casilla1 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 2 && casilla2 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 100;
+                                casilla2 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 3 && casilla3 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 90;
+                                casilla3 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        
+                        if(pos1 == 5 && casilla5 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 150;
+                                casilla5 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
+                        if(pos1 == 6 && casilla6 == 0)
+                        {
+                            int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
+                            if(ax == JOptionPane.YES_OPTION)
+                            {
+                                jug1 = jug1 - 140;
+                                casilla6 = 1;
+                            }
+                            else if(ax == JOptionPane.NO_OPTION)
+                            {
+                            JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
+                            }    
+                        } 
                 
                 
                 
@@ -167,37 +605,230 @@ public class Movimiento extends javax.swing.JFrame {
         
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_tirarActionPerformed
+    }//GEN-LAST:event_tirar1ActionPerformed
+
+    private void tirar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tirar2ActionPerformed
+        dados.enable(true);
+            dados.setVisible(true);// TODO add your handling code here:
+
+            int velocidad = 2;
+        
+        Timer time;
+        TimerTask tarea;
+        
+        int velmil = velocidad * 1000;
+        
+        x2 = peon2.getX();
+        y2 = peon2.getY();
+        
+        
+        
+        tarea = new TimerTask() {
+
+            @Override
+            public void run() {
+               
+                dados.enable(false);
+                dados.setVisible(false);
+
+                numero = girar();
+                
+                for(int x = 1; numero>=x; x++)
+                {
+                        pos2 = pos2 + 1;
+                        if(pos2 <= 4)
+                        {
+                        pasoarribap2();
+                        }
+                        if(pos2 > 4 && pos2 <=11)
+                        {
+                        pasoderp2();
+                        }
+                        if(pos2 >11 && pos2 <=15)
+                        {
+                        pasoabajop2();
+                        }
+                        if(pos2 >15 && pos2 <=22)
+                        {
+                        pasoizqp2();
+                            if(pos2 == 22)
+                            {
+                            pos2 = 0;
+                            }
+                        }
+                }    
+            
+                
+                
+                
+              }
+        };
+        
+        time = new Timer();
+        
+//        time.scheduleAtFixedRate(tarea, velmil, velmil);
+        time.schedule(tarea, velmil);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tirar2ActionPerformed
+
+    private void tirar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tirar3ActionPerformed
+        dados.enable(true);
+            dados.setVisible(true);// TODO add your handling code here:
+
+            int velocidad = 2;
+        
+        Timer time;
+        TimerTask tarea;
+        
+        int velmil = velocidad * 1000;
+        
+        x3 = peon3.getX();
+        y3 = peon3.getY();
+        
+        
+        
+        tarea = new TimerTask() {
+
+            @Override
+            public void run() {
+               
+                dados.enable(false);
+                dados.setVisible(false);
+
+                numero = girar();
+                
+                for(int x = 1; numero>=x; x++)
+                {
+                        pos3 = pos3 + 1;
+                        if(pos3 <= 4)
+                        {
+                        pasoarribap3();
+                        }
+                        if(pos3 > 4 && pos3 <=11)
+                        {
+                        pasoderp3();
+                        }
+                        if(pos3 >11 && pos3 <=15)
+                        {
+                        pasoabajop3();
+                        }
+                        if(pos3 >15 && pos3 <=22)
+                        {
+                        pasoizqp3();
+                            if(pos3 == 22)
+                            {
+                            pos3 = 0;
+                            }
+                        }
+                }    
+            
+                
+                
+                
+              }
+        };
+        
+        time = new Timer();
+        
+//        time.scheduleAtFixedRate(tarea, velmil, velmil);
+        time.schedule(tarea, velmil);
+// TODO add your handling code here:
+    }//GEN-LAST:event_tirar3ActionPerformed
 
         public void pasoder()
     {
-        x = peon1.getX();
-        y = peon1.getY();
+        x1 = peon1.getX();
+        y1 = peon1.getY();
         
-        peon1.setLocation(x+110, y);      
+        peon1.setLocation(x1+110, y1);      
     }
         
         public void pasoizq()
     {
-        x = peon1.getX();
-        y = peon1.getY();
+        x1 = peon1.getX();
+        y1 = peon1.getY();
         
-        peon1.setLocation(x-110, y);      
+        peon1.setLocation(x1-110, y1);      
     }
         public void pasoarriba()
     {
-        x = peon1.getX();
-        y = peon1.getY();
+        x1 = peon1.getX();
+        y1 = peon1.getY();
         
-        peon1.setLocation(x, y-110);      
+        peon1.setLocation(x1, y1-110);      
     }
         public void pasoabajo()
     {
-        x = peon1.getX();
-        y = peon1.getY();
+        x1 = peon1.getX();
+        y1 = peon1.getY();
         
-        peon1.setLocation(x, y+110);      
+        peon1.setLocation(x1, y1+110);      
     }
+       
+        
+    
+        
+    public void pasoderp2()
+    {
+        x2 = peon2.getX();
+        y2 = peon2.getY();
+        
+        peon2.setLocation(x2+110, y2);      
+    }
+        
+        public void pasoizqp2()
+    {
+        x2 = peon2.getX();
+        y2 = peon2.getY();
+        
+        peon2.setLocation(x2-110, y2);      
+    }
+        public void pasoarribap2()
+    {
+        x2 = peon2.getX();
+        y2 = peon2.getY();
+        
+        peon2.setLocation(x2, y2-110);      
+    }
+        public void pasoabajop2()
+    {
+        x2 = peon2.getX();
+        y2 = peon2.getY();
+        
+        peon2.setLocation(x2, y2+110);      
+    }
+        
+    
+        public void pasoderp3()
+    {
+        x3 = peon3.getX();
+        y3 = peon3.getY();
+        
+        peon3.setLocation(x3+110, y3);      
+    }
+        
+        public void pasoizqp3()
+    {
+        x3 = peon3.getX();
+        y3 = peon3.getY();
+        
+        peon3.setLocation(x3-110, y3);      
+    }
+        public void pasoarribap3()
+    {
+        x3 = peon3.getX();
+        y3 = peon3.getY();
+        
+        peon3.setLocation(x3, y3-110);      
+    }
+        public void pasoabajop3()
+    {
+        x3 = peon3.getX();
+        y3 = peon3.getY();
+        
+        peon3.setLocation(x3, y3+110);      
+    }
+        
         
     
         
@@ -256,7 +887,11 @@ public class Movimiento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dados;
     private javax.swing.JLabel peon1;
+    private javax.swing.JLabel peon2;
+    private javax.swing.JLabel peon3;
     private javax.swing.JLabel tablero;
-    private javax.swing.JButton tirar;
+    private javax.swing.JButton tirar1;
+    private javax.swing.JButton tirar2;
+    private javax.swing.JButton tirar3;
     // End of variables declaration//GEN-END:variables
 }
