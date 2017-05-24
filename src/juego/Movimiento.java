@@ -101,6 +101,7 @@ public class Movimiento extends javax.swing.JFrame {
         peon4 = new javax.swing.JLabel();
         peon5 = new javax.swing.JLabel();
         peon6 = new javax.swing.JLabel();
+        btncupon = new javax.swing.JButton();
         tablero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -127,7 +128,7 @@ public class Movimiento extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tirar1);
-        tirar1.setBounds(300, 310, 120, 30);
+        tirar1.setBounds(300, 310, 120, 23);
 
         peon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza2.png"))); // NOI18N
         getContentPane().add(peon2);
@@ -157,21 +158,21 @@ public class Movimiento extends javax.swing.JFrame {
 
         lblJug1.setText("Jugador 1");
         getContentPane().add(lblJug1);
-        lblJug1.setBounds(320, 370, 56, 16);
+        lblJug1.setBounds(320, 370, 48, 14);
 
         lblJug2.setText("Jugador 2");
         getContentPane().add(lblJug2);
-        lblJug2.setBounds(320, 400, 60, 16);
+        lblJug2.setBounds(320, 400, 60, 14);
 
         lblJug3.setText("Jugador 3");
         getContentPane().add(lblJug3);
-        lblJug3.setBounds(320, 430, 56, 16);
+        lblJug3.setBounds(320, 430, 48, 14);
         getContentPane().add(txtJug1);
-        txtJug1.setBounds(390, 370, 80, 22);
+        txtJug1.setBounds(390, 370, 80, 20);
         getContentPane().add(txtJug2);
-        txtJug2.setBounds(390, 400, 80, 22);
+        txtJug2.setBounds(390, 400, 80, 20);
         getContentPane().add(txtJug3);
-        txtJug3.setBounds(390, 430, 80, 22);
+        txtJug3.setBounds(390, 430, 80, 20);
 
         peon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza1.png"))); // NOI18N
         getContentPane().add(peon4);
@@ -185,9 +186,18 @@ public class Movimiento extends javax.swing.JFrame {
         getContentPane().add(peon6);
         peon6.setBounds(280, 420, 70, 40);
 
+        btncupon.setText("CUPON");
+        btncupon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncuponActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btncupon);
+        btncupon.setBounds(530, 360, 130, 30);
+
         tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/bancopoly.jpg"))); // NOI18N
         getContentPane().add(tablero);
-        tablero.setBounds(12, 13, 900, 580);
+        tablero.setBounds(20, 30, 880, 540);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -487,10 +497,15 @@ public class Movimiento extends javax.swing.JFrame {
                             pos1 = 4;
                             jug1 = jug1 - 100;
                         } 
+                        
                         if(pos1 == 16 && casillas[16]== 0)
                         {
-                            //cupon
+                            JOptionPane.showMessageDialog(null, "Seleccione el Boton Cupon");  //cupon
+                            btncupon.setEnabled(true);
+                            
                         } 
+                        
+                        
                         if(pos1 == 17 && casillas[17]== 0)
                         {
                             if(jug1>=310)
@@ -1389,6 +1404,69 @@ public class Movimiento extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_tirar3ActionPerformed
 
+    private void btncuponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncuponActionPerformed
+       
+        int dato1, dato2;
+            
+        String cadena;
+        String lista = "LIBRE_DE_CARCEL COBRE_100 PAGUE_100";
+        Random azar = new Random();
+ 
+        //genera numero al azar de la cadena
+        dato1 = azar.nextInt(lista.length());
+ 
+        // Verifica la posicion si es espacio vacio o letra
+        if(lista.charAt(dato1) == ' ')
+        {
+            dato2 = ++dato1;
+        }
+        else
+        {
+            dato2 = dato1;
+ 
+            while(dato1 - 1 >= 0 && lista.charAt(dato1 - 1) != ' ')
+                dato1--;
+        }
+ 
+       // Ubica el final de la palabra
+        while((dato2 + 1) <= lista.length())
+        {
+            if(lista.charAt(dato2) != ' ')
+                dato2++;
+            else
+                break;
+        }
+ 
+        cadena = lista.substring(dato1, dato2);
+        JOptionPane.showMessageDialog(null, (cadena));
+        
+        if("COBRE_100".equals(cadena)){
+           jug1= jug1 + 100;
+           txtJug1.setText("Q" +jug1);
+        }
+        else{      
+        
+    }//GEN-LAST:event_btncuponActionPerformed
+
+    
+    if("PAGUE_100".equals(cadena)){
+           jug1= jug1 - 100;
+           txtJug1.setText("Q" + jug1);
+        }
+        else{
+        }
+
+    
+    if("LIBRE_DE_CARCEL".equals(cadena)){
+           
+        }
+        else{
+        }
+        
+    }        
+    
+
+    
         public void pasoder()
     {
         x1 = peon1.getX();
@@ -1549,6 +1627,7 @@ public class Movimiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btncupon;
     private javax.swing.JLabel dados;
     private javax.swing.JLabel lblJug1;
     private javax.swing.JLabel lblJug2;
