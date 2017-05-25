@@ -101,7 +101,7 @@ public class Movimiento extends javax.swing.JFrame {
         peon4 = new javax.swing.JLabel();
         peon5 = new javax.swing.JLabel();
         peon6 = new javax.swing.JLabel();
-        btncupon = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         tablero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,7 +128,7 @@ public class Movimiento extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tirar1);
-        tirar1.setBounds(300, 310, 120, 23);
+        tirar1.setBounds(300, 310, 120, 30);
 
         peon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza2.png"))); // NOI18N
         getContentPane().add(peon2);
@@ -158,21 +158,21 @@ public class Movimiento extends javax.swing.JFrame {
 
         lblJug1.setText("Jugador 1");
         getContentPane().add(lblJug1);
-        lblJug1.setBounds(320, 370, 48, 14);
+        lblJug1.setBounds(320, 370, 56, 16);
 
         lblJug2.setText("Jugador 2");
         getContentPane().add(lblJug2);
-        lblJug2.setBounds(320, 400, 60, 14);
+        lblJug2.setBounds(320, 400, 60, 16);
 
         lblJug3.setText("Jugador 3");
         getContentPane().add(lblJug3);
-        lblJug3.setBounds(320, 430, 48, 14);
+        lblJug3.setBounds(320, 430, 56, 16);
         getContentPane().add(txtJug1);
-        txtJug1.setBounds(390, 370, 80, 20);
+        txtJug1.setBounds(390, 370, 80, 22);
         getContentPane().add(txtJug2);
-        txtJug2.setBounds(390, 400, 80, 20);
+        txtJug2.setBounds(390, 400, 80, 22);
         getContentPane().add(txtJug3);
-        txtJug3.setBounds(390, 430, 80, 20);
+        txtJug3.setBounds(390, 430, 80, 22);
 
         peon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza1.png"))); // NOI18N
         getContentPane().add(peon4);
@@ -186,18 +186,18 @@ public class Movimiento extends javax.swing.JFrame {
         getContentPane().add(peon6);
         peon6.setBounds(280, 420, 70, 40);
 
-        btncupon.setText("CUPON");
-        btncupon.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("FINALIZAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncuponActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btncupon);
-        btncupon.setBounds(530, 360, 130, 30);
+        getContentPane().add(jButton1);
+        jButton1.setBounds(520, 410, 130, 30);
 
         tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/bancopoly.jpg"))); // NOI18N
         getContentPane().add(tablero);
-        tablero.setBounds(20, 30, 880, 540);
+        tablero.setBounds(10, 0, 920, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -500,8 +500,88 @@ public class Movimiento extends javax.swing.JFrame {
                         
                         if(pos1 == 16 && casillas[16]== 0)
                         {
-                            JOptionPane.showMessageDialog(null, "Seleccione el Boton Cupon");  //cupon
-                            btncupon.setEnabled(true);
+//                            JOptionPane.showMessageDialog(null, "Seleccione el Boton Cupon");  //cupon
+//                            btncupon.setEnabled(true);
+                            int cupon = girar();
+                            if(cupon==1)
+                            {
+                                JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q50 de peaje, ademas del peaje normal (si procede)");
+                                jug1 = jug1-50;
+                                pasoder();
+                                pasoarriba();
+                                pasoarriba();
+                                pasoarriba();
+                                pasoarriba();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pos1 = 6;
+                                if(casillas[6]==2)
+                                {
+                                    jug1 = jug1-50;
+                                    jug2 = jug2+50;
+                                }
+                                if(casillas[6]==3)
+                                {
+                                    jug1 = jug1-50;
+                                    jug3 = jug3+50;
+                                }
+                            }
+                            if(cupon==2)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q150 a la SAT por declaracion de impuestos");
+                                jug1 = jug1-150;
+                            }
+                            if(cupon == 3)
+                            {
+                                JOptionPane.showMessageDialog(null, "Vaya directo a la carcel no pase por la entrada");
+                                pasoder();
+                                pasoarriba();
+                                pasoarriba();
+                                pasoarriba();
+                                pasoarriba();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pasoizq();
+                                pos1 = 4;
+                                jug1 = jug1 - 100;
+                            }
+                            if(cupon ==4)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de empagua, si procede");
+                                if(casillas[14]==2)
+                                {
+                                    jug1 = jug1-100;
+                                    jug2 = jug2+100;
+                                }
+                                if(casillas[14]==3)
+                                {
+                                    jug1 = jug1-100;
+                                    jug3 = jug3+100;
+                                }
+                            
+                            }
+                            if(cupon ==5)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de fegua, si procede");
+                                if(casillas[8]==2)
+                                {
+                                    jug1 = jug1-100;
+                                    jug2 = jug2+100;
+                                }
+                                if(casillas[8]==3)
+                                {
+                                    jug1 = jug1-100;
+                                    jug3 = jug3+100;
+                                }
+                            
+                            }
                             
                         } 
                         
@@ -895,10 +975,94 @@ public class Movimiento extends javax.swing.JFrame {
                             pos2 = 4;
                             jug2 = jug2 - 100;
                         } 
+                        
                         if(pos2 == 16 && casillas[16]== 0)
                         {
-                            //cupon
+                           int cupon = girar();
+                            if(cupon==1)
+                            {
+                                JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q50 de peaje, ademas del peaje normal (si procede)");
+                                jug2 = jug2-50;
+                                pasoderp2();
+                                pasoarribap2();
+                                pasoarribap2();
+                                pasoarribap2();
+                                pasoarribap2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pos2 = 6;
+                                if(casillas[6]==1)
+                                {
+                                    jug1 = jug1+50;
+                                    jug2 = jug2-50;
+                                }
+                                if(casillas[6]==3)
+                                {
+                                    jug2 = jug2-50;
+                                    jug3 = jug3+50;
+                                }
+                            }
+                            if(cupon==2)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q150 a la SAT por declaracion de impuestos");
+                                jug2 = jug2-150;
+                            }
+                            if(cupon == 3)
+                            {
+                                JOptionPane.showMessageDialog(null, "Vaya directo a la carcel no pase por la entrada");
+                                pasoderp2();
+                                pasoarribap2();
+                                pasoarribap2();
+                                pasoarribap2();
+                                pasoarribap2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pasoizqp2();
+                                pos2 = 4;
+                                jug2 = jug2 - 100;
+                            }
+                            if(cupon ==4)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de empagua, si procede");
+                                if(casillas[14]==1)
+                                {
+                                    jug1 = jug1+100;
+                                    jug2 = jug2-100;
+                                }
+                                if(casillas[14]==3)
+                                {
+                                    jug2 = jug2-100;
+                                    jug3 = jug3+100;
+                                }
+                            
+                            }
+                            if(cupon ==5)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de fegua, si procede");
+                                if(casillas[14]==1)
+                                {
+                                    jug1 = jug1+100;
+                                    jug2 = jug2-100;
+                                }
+                                if(casillas[14]==3)
+                                {
+                                    jug2 = jug2-100;
+                                    jug3 = jug3+100;
+                                }
+                            
+                            }
                         } 
+                        
+                        
+                        
+                        
                         if(pos2 == 17 && casillas[17]== 0)
                         {
                             if(jug2>=310)
@@ -1288,7 +1452,86 @@ public class Movimiento extends javax.swing.JFrame {
                         } 
                         if(pos3 == 16 && casillas[16]== 0)
                         {
-                            //cupon
+                            int cupon = girar();
+                            if(cupon==1)
+                            {
+                                JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q50 de peaje, ademas del peaje normal (si procede)");
+                                jug3 = jug3-50;
+                                pasoderp3();
+                                pasoarribap3();
+                                pasoarribap3();
+                                pasoarribap3();
+                                pasoarribap3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pos3 = 6;
+                                if(casillas[6]==1)
+                                {
+                                    jug1 = jug1+50;
+                                    jug3 = jug3-50;
+                                }
+                                if(casillas[6]==2)
+                                {
+                                    jug2 = jug2+50;
+                                    jug3 = jug3-50;
+                                }
+                            }
+                            if(cupon==2)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q150 a la SAT por declaracion de impuestos");
+                                jug3 = jug3-150;
+                            }
+                            if(cupon == 3)
+                            {
+                                JOptionPane.showMessageDialog(null, "Vaya directo a la carcel no pase por la entrada");
+                                pasoderp3();
+                                pasoarribap3();
+                                pasoarribap3();
+                                pasoarribap3();
+                                pasoarribap3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pasoizqp3();
+                                pos3 = 4;
+                                jug3 = jug3 - 100;
+                            }
+                            if(cupon ==4)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de empagua, si procede");
+                                if(casillas[14]==1)
+                                {
+                                    jug1 = jug1+100;
+                                    jug3 = jug3-100;
+                                }
+                                if(casillas[14]==2)
+                                {
+                                    jug3 = jug3-100;
+                                    jug2 = jug2+100;
+                                }
+                            
+                            }
+                            if(cupon ==5)
+                            {
+                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de fegua, si procede");
+                                if(casillas[14]==1)
+                                {
+                                    jug1 = jug1+100;
+                                    jug3 = jug3-100;
+                                }
+                                if(casillas[14]==2)
+                                {
+                                    jug2 = jug2+100;
+                                    jug3 = jug3-100;
+                                }
+                            
+                            }
                         } 
                         if(pos3 == 17 && casillas[17]== 0)
                         {
@@ -1404,66 +1647,109 @@ public class Movimiento extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_tirar3ActionPerformed
 
-    private void btncuponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncuponActionPerformed
-       
-        int dato1, dato2;
-            
-        String cadena;
-        String lista = "LIBRE_DE_CARCEL COBRE_100 PAGUE_100";
-        Random azar = new Random();
- 
-        //genera numero al azar de la cadena
-        dato1 = azar.nextInt(lista.length());
- 
-        // Verifica la posicion si es espacio vacio o letra
-        if(lista.charAt(dato1) == ' ')
-        {
-            dato2 = ++dato1;
-        }
-        else
-        {
-            dato2 = dato1;
- 
-            while(dato1 - 1 >= 0 && lista.charAt(dato1 - 1) != ' ')
-                dato1--;
-        }
- 
-       // Ubica el final de la palabra
-        while((dato2 + 1) <= lista.length())
-        {
-            if(lista.charAt(dato2) != ' ')
-                dato2++;
-            else
-                break;
-        }
- 
-        cadena = lista.substring(dato1, dato2);
-        JOptionPane.showMessageDialog(null, (cadena));
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        double total1 = propiedad1 + jug1;
+        double total2 = propiedad2 + jug2;
+        double total3 = propiedad3 + jug3;
         
-        if("COBRE_100".equals(cadena)){
-           jug1= jug1 + 100;
-           txtJug1.setText("Q" +jug1);
+        if(total1>total2 && total1>total3)
+        {
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1"  + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+            if(total2>=total3)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 2"  + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+                JOptionPane.showMessageDialog(null, "3er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+            }
+            if(total3>total2)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+                JOptionPane.showMessageDialog(null, "3er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+                
+            }
+            if(total2==total3)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+            }
         }
-        else{      
         
-    }//GEN-LAST:event_btncuponActionPerformed
+        else if(total2>total1 && total2>total3)
+        {
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+            if(total1>total3)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+                JOptionPane.showMessageDialog(null, "3er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+            }
+            if(total3>total1)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+                JOptionPane.showMessageDialog(null, "3er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+                
+            }
+            if(total1==total3)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+            }
+        }
+        
+        
+        else if(total3>total1 && total3>total2)
+        {
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+            if(total1>total2)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+                JOptionPane.showMessageDialog(null, "3er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+            }
+            if(total2>total1)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+                JOptionPane.showMessageDialog(null, "3er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+                
+            }
+            if(total1==total2)
+            {
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug2 + "  Total: Q" + total1);
+            }
+        }
+        
+        
+        else if(total1==total2 && total1!=total3 && total3!=total2)
+        {
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+            JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+        }
+        
+        else if(total1==total3 && total1!=total2 && total3!=total2)
+        {
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+            JOptionPane.showMessageDialog(null, "2do lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+        }
+        
+        else if(total3==total2 && total1!=total3 && total1!=total2)
+        {
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+            JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+        }
+        
+        else if(total1==total2 && total2==total3 && total1==total3)
+        {
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+        }
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
-    if("PAGUE_100".equals(cadena)){
-           jug1= jug1 - 100;
-           txtJug1.setText("Q" + jug1);
-        }
-        else{
-        }
-
-    
-    if("LIBRE_DE_CARCEL".equals(cadena)){
-           
-        }
-        else{
-        }
-        
-    }        
     
 
     
@@ -1627,8 +1913,8 @@ public class Movimiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncupon;
     private javax.swing.JLabel dados;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblJug1;
     private javax.swing.JLabel lblJug2;
     private javax.swing.JLabel lblJug3;
