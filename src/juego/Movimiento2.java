@@ -22,7 +22,7 @@ import java.util.TimerTask;
 import javax.swing.JOptionPane;
 
 
-public class Movimiento extends javax.swing.JFrame {
+public class Movimiento2 extends javax.swing.JFrame {
 
     /**
      * Creates new form Movimiento
@@ -39,19 +39,16 @@ public class Movimiento extends javax.swing.JFrame {
     int x2;
     int y2;
     
-    //posicion x,y del peon 3 en el tablero
-    int x3;
-    int y3;
     
     //posiciones logicas de los peones contra el tablero, nos sirve para comparar contra las casillas 
     int pos1 = 0;
     int pos2 = 0;
-    int pos3 = 0;
+   
     
     //variables jug, que sirven para mostrar el saldo de los jugadores
     double jug1 = 500;
     double jug2 = 500;
-    double jug3 = 500;
+    
     
     //casillas logicas del tablero, valor o representa que no ha sido comprada, 1 que le pertenece al jugador 1, 2 que le pertenece al jugador 2, y 3 que le pertenece al jugador 3
     int casillas[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -60,23 +57,23 @@ public class Movimiento extends javax.swing.JFrame {
     //suma el valor de las propiedades adquirida VCs por cada jugador, nos sirve para obtener el impuesto en las casillas SAT
     int propiedad1 = 0;
     int propiedad2 = 0;
-    int propiedad3 = 0;
+    
     
     int descanzo1 = 0;
     int descanzo2 = 0;
-    int descanzo3 = 0;
     
     
-    public Movimiento() {
+    
+    public Movimiento2() {
         initComponents();
         dados.setVisible(false);
         tirar2.setVisible(false);
-        tirar3.setVisible(false);
+        
         tirar2.setEnabled(false);
-        tirar3.setEnabled(false);
+        
         txtJug1.setText("Q" + jug1);
         txtJug2.setText("Q" + jug2);
-        txtJug3.setText("Q" + jug3);
+        
     }
 
     /**
@@ -92,18 +89,13 @@ public class Movimiento extends javax.swing.JFrame {
         dados = new javax.swing.JLabel();
         tirar1 = new javax.swing.JButton();
         peon2 = new javax.swing.JLabel();
-        peon3 = new javax.swing.JLabel();
         tirar2 = new javax.swing.JButton();
-        tirar3 = new javax.swing.JButton();
         lblJug1 = new javax.swing.JLabel();
         lblJug2 = new javax.swing.JLabel();
-        lblJug3 = new javax.swing.JLabel();
         txtJug1 = new javax.swing.JTextField();
         txtJug2 = new javax.swing.JTextField();
-        txtJug3 = new javax.swing.JTextField();
         peon4 = new javax.swing.JLabel();
         peon5 = new javax.swing.JLabel();
-        peon6 = new javax.swing.JLabel();
         btnFinalizar = new javax.swing.JButton();
         btnReiniciar = new javax.swing.JButton();
         tablero = new javax.swing.JLabel();
@@ -138,10 +130,6 @@ public class Movimiento extends javax.swing.JFrame {
         getContentPane().add(peon2);
         peon2.setBounds(90, 500, 40, 40);
 
-        peon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza3.png"))); // NOI18N
-        getContentPane().add(peon3);
-        peon3.setBounds(70, 530, 70, 40);
-
         tirar2.setText("TIRAR PEON 2");
         tirar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,15 +139,6 @@ public class Movimiento extends javax.swing.JFrame {
         getContentPane().add(tirar2);
         tirar2.setBounds(300, 310, 120, 30);
 
-        tirar3.setText("TIRAR PEON 3");
-        tirar3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tirar3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(tirar3);
-        tirar3.setBounds(300, 310, 120, 30);
-
         lblJug1.setText("Jugador 1");
         getContentPane().add(lblJug1);
         lblJug1.setBounds(320, 370, 56, 16);
@@ -167,16 +146,10 @@ public class Movimiento extends javax.swing.JFrame {
         lblJug2.setText("Jugador 2");
         getContentPane().add(lblJug2);
         lblJug2.setBounds(320, 400, 60, 16);
-
-        lblJug3.setText("Jugador 3");
-        getContentPane().add(lblJug3);
-        lblJug3.setBounds(320, 430, 56, 16);
         getContentPane().add(txtJug1);
         txtJug1.setBounds(390, 370, 80, 22);
         getContentPane().add(txtJug2);
         txtJug2.setBounds(390, 400, 80, 22);
-        getContentPane().add(txtJug3);
-        txtJug3.setBounds(390, 430, 80, 22);
 
         peon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza1.png"))); // NOI18N
         getContentPane().add(peon4);
@@ -185,10 +158,6 @@ public class Movimiento extends javax.swing.JFrame {
         peon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza2.png"))); // NOI18N
         getContentPane().add(peon5);
         peon5.setBounds(280, 390, 40, 40);
-
-        peon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pieza3.png"))); // NOI18N
-        getContentPane().add(peon6);
-        peon6.setBounds(280, 420, 70, 40);
 
         btnFinalizar.setText("FINALIZAR");
         btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -537,11 +506,7 @@ public class Movimiento extends javax.swing.JFrame {
                                     jug1 = jug1-50;
                                     jug2 = jug2+50;
                                 }
-                                if(casillas[6]==3)
-                                {
-                                    jug1 = jug1-50;
-                                    jug3 = jug3+50;
-                                }
+                                
                             }
                             if(cupon==2)
                             {
@@ -574,11 +539,7 @@ public class Movimiento extends javax.swing.JFrame {
                                     jug1 = jug1-100;
                                     jug2 = jug2+100;
                                 }
-                                if(casillas[14]==3)
-                                {
-                                    jug1 = jug1-100;
-                                    jug3 = jug3+100;
-                                }
+                                
                             
                             }
                             if(cupon ==5)
@@ -589,11 +550,7 @@ public class Movimiento extends javax.swing.JFrame {
                                     jug1 = jug1-100;
                                     jug2 = jug2+100;
                                 }
-                                if(casillas[8]==3)
-                                {
-                                    jug1 = jug1-100;
-                                    jug3 = jug3+100;
-                                }
+                                
                             
                             }
                             
@@ -684,33 +641,32 @@ public class Movimiento extends javax.swing.JFrame {
                                 jug2 = jug2 + 50;
                                 jug1 = jug1 - 50;
                             } 
-                           //validacion de posiciones contra el estado "jugador 3"
-                           if(pos1 == i && casillas[i] == 3)
-                            {
-                                jug3 = jug3 + 50;
-                                jug1 = jug1 - 50;
-                            } 
+                           
+                           
                         
                         }
                
                
                txtJug1.setText("Q" + jug1);
                txtJug2.setText("Q" + jug2);
-               txtJug3.setText("Q" + jug3);
+               
                if(descanzo2==0)
                {
                 tirar2.setVisible(true);
                 tirar2.setEnabled(true);
+                tirar1.setEnabled(false);
+                tirar1.setVisible(false);
                }
                else 
                {
-                tirar3.setVisible(true);
-                tirar3.setEnabled(true);
+                tirar2.setVisible(false);
+                tirar2.setEnabled(false);
+                tirar1.setEnabled(true);
+                tirar1.setVisible(true);
                 descanzo2=0;
                }
                
-               tirar1.setEnabled(false);
-               tirar1.setVisible(false);
+               
               
               }
         };
@@ -1025,11 +981,7 @@ public class Movimiento extends javax.swing.JFrame {
                                     jug1 = jug1+50;
                                     jug2 = jug2-50;
                                 }
-                                if(casillas[6]==3)
-                                {
-                                    jug2 = jug2-50;
-                                    jug3 = jug3+50;
-                                }
+                                
                             }
                             if(cupon==2)
                             {
@@ -1062,11 +1014,7 @@ public class Movimiento extends javax.swing.JFrame {
                                     jug1 = jug1+100;
                                     jug2 = jug2-100;
                                 }
-                                if(casillas[14]==3)
-                                {
-                                    jug2 = jug2-100;
-                                    jug3 = jug3+100;
-                                }
+                                
                             
                             }
                             if(cupon ==5)
@@ -1077,11 +1025,7 @@ public class Movimiento extends javax.swing.JFrame {
                                     jug1 = jug1+100;
                                     jug2 = jug2-100;
                                 }
-                                if(casillas[14]==3)
-                                {
-                                    jug2 = jug2-100;
-                                    jug3 = jug3+100;
-                                }
+                                
                             
                             }
                         } 
@@ -1174,34 +1118,32 @@ public class Movimiento extends javax.swing.JFrame {
                                 jug2 = jug2 - 50;
                             } 
                            //validacion de posiciones contra el estado "jugador 3"
-                           if(pos1 == i && casillas[i] == 3)
-                            {
-                                jug3 = jug3 + 50;
-                                jug2 = jug2 - 50;
-                            } 
+                           
                         
                         }
                
                
                txtJug1.setText("Q" + jug1);
                txtJug2.setText("Q" + jug2);
-               txtJug3.setText("Q" + jug3);
                
-               if(descanzo3==0)
-               {
-                tirar3.setVisible(true);
-                tirar3.setEnabled(true);
-               }
-               else 
+               
+               if(descanzo1==0)
                {
                 tirar1.setVisible(true);
                 tirar1.setEnabled(true);
-                descanzo3=0;
+                tirar2.setEnabled(false);
+                tirar2.setVisible(false);
+               }
+               else 
+               {
+                tirar1.setVisible(false);
+                tirar1.setEnabled(false);
+                tirar2.setEnabled(true);
+                tirar2.setVisible(true);
+                descanzo2=0;
                }
                
-         
-               tirar2.setEnabled(false);
-               tirar2.setVisible(false);
+               
               }
         };
         
@@ -1213,584 +1155,27 @@ public class Movimiento extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tirar2ActionPerformed
 
-    private void tirar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tirar3ActionPerformed
-         dados.enable(true);
-            dados.setVisible(true);// TODO add your handling code here:
-
-            int velocidad = 2;
-        
-        Timer time;
-        TimerTask tarea;
-        
-        int velmil = velocidad * 1000;
-        
-        
-        //actualiza las posiciones del peon1
-        x3 = peon3.getX();
-        y3 = peon3.getY();
-        
-        
-        
-        tarea = new TimerTask() {
-
-            @Override
-            public void run() {
-               
-                dados.enable(false);
-                dados.setVisible(false);
-                
-                
-                //la variable numero obtiene el valor retornado del dado, para luego escalar las posiciones
-                numero = girar();
-                JOptionPane.showMessageDialog(null, "Numero devuelto: " + numero);
-                
-                //validacion para avanzar deacuerdo a las casillas
-                for(int x = 1; numero>=x; x++)
-                {
-                        pos3 = pos3 + 1;
-                        if(pos3 <= 4)
-                        {
-                        pasoarribap3();
-                        }
-                        if(pos3 > 4 && pos3 <=11)
-                        {
-                        pasoderp3();
-                        }
-                        if(pos3 >11 && pos3 <=15)
-                        {
-                        pasoabajop3();
-                        }
-                        if(pos3 >15 && pos3 <=22)
-                        {
-                        pasoizqp3();
-                            if(pos3 == 22)
-                            {
-                                //cuando de una vuelta completa se le asigna nuevamente 0 que es el inicio, y a su saldo se le suman 100 segun instrucciones del docto.
-                            pos3 = 0;
-                            jug3 = jug3 + 100;
-                            }
-                        }
-                }
-                        //empieza la validacion de la posicion actual del peon contra el estado de las casillas
-                        //validacion de posiciones contra el estado "banco/ no comprado"
-                
-                        if(pos3 == 1 && casillas[1] == 0)
-                        {
-                            if(jug3>=130)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 130;
-                                    casillas[1] = 3;
-                                    propiedad3 = propiedad3 + 130;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        if(pos3 == 2 && casillas[2] == 0)
-                        {
-                            if(jug3>=100)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 100;
-                                    casillas[2] = 3;
-                                    propiedad3 = propiedad3 + 100;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        if(pos3 == 3 && casillas[3] == 0)
-                        {
-                            if(jug3>=90)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 90;
-                                    casillas[3] = 3;
-                                    propiedad3 = propiedad3 + 90;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        
-                        if(pos3 == 5 && casillas[5] == 0)
-                        {
-                            if(jug3>=150)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 150;
-                                    casillas[5] = 3;
-                                    propiedad3 = propiedad3 + 150;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }  
-                            }
-                        } 
-                        if(pos3 == 6 && casillas[6] == 0)
-                        {
-                            if(jug3>=140)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 140;
-                                    casillas[6] = 3;
-                                    propiedad3 = propiedad3 + 140;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                } 
-                            }
-                        } 
-                        if(pos3 == 7 && casillas[7] == 0)
-                        {
-                            if(jug3>=50)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Peten por Q50.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 50;
-                                    casillas[7]= 3;
-                                    propiedad3 = propiedad3 + 50;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        if(pos3 == 8 && casillas[8] == 0)
-                        {
-                            if(jug3>=190)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Fegua por Q190.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 190;
-                                    casillas[8] = 3;
-                                    propiedad3 = propiedad3 + 190;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        if(pos3 == 9 && casillas[9] == 0)
-                        {
-                            if(jug3>=170)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Solola por Q170.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 170;
-                                    casillas[9]= 3;
-                                    propiedad3 = propiedad3 + 170;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        
-                        if(pos3 == 10 && casillas[10]== 0)
-                        {
-                            double impuesto = propiedad3 * 0.10;
-                            jug3 = jug3 - impuesto;
-                        } 
-                        if(pos3 == 11 && casillas[11] == 0)
-                        {
-                            descanzo3 = 1;
-                        } 
-                        if(pos3 == 12 && casillas[12]== 0)
-                        {
-                            if(jug3>=230)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar San Marcos por Q230.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 230;
-                                    casillas[12] = 3;
-                                    propiedad3 = propiedad3 + 230;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                } 
-                            }
-                        } 
-                        if(pos3 == 13 && casillas[13] == 0)
-                        {
-                            if(jug3>=250)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Baja Verapaz por Q250.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 250;
-                                    casillas[13]= 3;
-                                    propiedad3 = propiedad3 + 250;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }   
-                            }
-                        } 
-                        if(pos3 == 14 && casillas[14] == 0)
-                        {
-                            if(jug3>=175)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Empagua por Q175.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 175;
-                                    casillas[14] = 3;
-                                    propiedad3 = propiedad3 + 175;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }   
-                            }
-                        } 
-                        
-                        if(pos3 == 15 && casillas[15] == 0)
-                        {
-                            pasoarribap3();
-                            pasoarribap3();
-                            pasoarribap3();
-                            pasoarribap3();
-                            pasoizqp3();
-                            pasoizqp3();
-                            pasoizqp3();
-                            pasoizqp3();
-                            pasoizqp3();
-                            pasoizqp3();
-                            pasoizqp3();
-                            pos3 = 4;
-                            jug3 = jug3 - 100;
-                        } 
-                        if(pos3 == 16 && casillas[16]== 0)
-                        {
-                            int cupon = girar();
-                            if(cupon==1)
-                            {
-                                JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q50 de peaje, ademas del peaje normal (si procede)");
-                                jug3 = jug3-50;
-                                pasoderp3();
-                                pasoarribap3();
-                                pasoarribap3();
-                                pasoarribap3();
-                                pasoarribap3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pos3 = 6;
-                                if(casillas[6]==1)
-                                {
-                                    jug1 = jug1+50;
-                                    jug3 = jug3-50;
-                                }
-                                if(casillas[6]==2)
-                                {
-                                    jug2 = jug2+50;
-                                    jug3 = jug3-50;
-                                }
-                            }
-                            if(cupon==2)
-                            {
-                                JOptionPane.showMessageDialog(null, "Pague Q150 a la SAT por declaracion de impuestos");
-                                jug3 = jug3-150;
-                            }
-                            if(cupon == 3)
-                            {
-                                JOptionPane.showMessageDialog(null, "Vaya directo a la carcel no pase por la entrada");
-                                pasoderp3();
-                                pasoarribap3();
-                                pasoarribap3();
-                                pasoarribap3();
-                                pasoarribap3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pasoizqp3();
-                                pos3 = 4;
-                                jug3 = jug3 - 100;
-                            }
-                            if(cupon ==4)
-                            {
-                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de empagua, si procede");
-                                if(casillas[14]==1)
-                                {
-                                    jug1 = jug1+100;
-                                    jug3 = jug3-100;
-                                }
-                                if(casillas[14]==2)
-                                {
-                                    jug3 = jug3-100;
-                                    jug2 = jug2+100;
-                                }
-                            
-                            }
-                            if(cupon ==5)
-                            {
-                                JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de fegua, si procede");
-                                if(casillas[14]==1)
-                                {
-                                    jug1 = jug1+100;
-                                    jug3 = jug3-100;
-                                }
-                                if(casillas[14]==2)
-                                {
-                                    jug2 = jug2+100;
-                                    jug3 = jug3-100;
-                                }
-                            
-                            }
-                        } 
-                        if(pos3 == 17 && casillas[17]== 0)
-                        {
-                            if(jug3>=310)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Santa Rosa por Q310.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 310;
-                                    casillas[17] = 3;
-                                    propiedad3 = propiedad3 + 310;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        if(pos3 == 18 && casillas[18]== 0)
-                        {
-                            if(jug3>=270)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Zacapa por Q270.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 270;
-                                    casillas[18] = 3;
-                                    propiedad3 = propiedad3 + 270;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                } 
-                            }
-                        } 
-                        if(pos3 == 19 && casillas[19]== 0)
-                        {
-                            if(jug3>=250)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Guatemala por Q250.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 250;
-                                    casillas[19] = 3;
-                                    propiedad3 = propiedad3 + 250;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                } 
-                            }
-                        } 
-                        
-                        if(pos3 == 20 && casillas[20]== 0)
-                        {
-                            if(jug3>=390)
-                            {
-                                int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Jutiapa por Q390.00");
-                                if(ax == JOptionPane.YES_OPTION)
-                                {
-                                    jug3 = jug3 - 390;
-                                    casillas[20] = 3;
-                                    propiedad3 = propiedad3 + 390;
-                                }
-                                else if(ax == JOptionPane.NO_OPTION)
-                                {
-                                JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
-                                }
-                            }
-                        } 
-                        if(pos3 == 21 && casillas[21] == 0)
-                        {
-                            double impuesto = propiedad3 * 0.10;
-                            jug3 = jug3 - impuesto;
-                        } 
-                        
-                          
-                        for(int i = 1; i<=21; i++)
-                        {
-                            //validacion de posiciones contra el estado "jugador 2"
-                           if(pos3 == i && casillas[i] == 2)
-                            {
-                                jug2 = jug2 + 50;
-                                jug3 = jug3 - 50;
-                            } 
-                           //validacion de posiciones contra el estado "jugador 3"
-                           if(pos3 == i && casillas[i] == 1)
-                            {
-                                jug1 = jug1 + 50;
-                                jug3 = jug3 - 50;
-                            } 
-                        
-                        }
-               
-               
-               txtJug1.setText("Q" + jug1);
-               txtJug2.setText("Q" + jug2);
-               txtJug3.setText("Q" + jug3);
-               if(descanzo1==0)
-               {
-                tirar1.setVisible(true);
-                tirar1.setEnabled(true);
-               }
-               else
-               {
-                tirar2.setVisible(true);
-                tirar2.setEnabled(true);
-                descanzo1=0;
-               }
-               tirar3.setEnabled(false);
-               tirar3.setVisible(false);
-              }
-        };
-        
-        time = new Timer();
-        
-//        time.scheduleAtFixedRate(tarea, velmil, velmil);
-        time.schedule(tarea, velmil);
-
-        
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_tirar3ActionPerformed
-
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         double total1 = propiedad1 + jug1;
         double total2 = propiedad2 + jug2;
-        double total3 = propiedad3 + jug3;
         
-        if(total1>total2 && total1>total3)
+        
+        if(total1>total2)
         {
             JOptionPane.showMessageDialog(null, "1er lugar: jugador 1"  + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-            if(total2>total3)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 2"  + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-                JOptionPane.showMessageDialog(null, "3er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-            }
-            if(total3>total2)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-                JOptionPane.showMessageDialog(null, "3er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-                
-            }
-            if(total2==total3)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-            }
+            JOptionPane.showMessageDialog(null, "2do lugar: jugador 2"  + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
         }
         
-        else if(total2>total1 && total2>total3)
+        if(total2>total1)
         {
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-            if(total1>total3)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-                JOptionPane.showMessageDialog(null, "3er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-            }
-            if(total3>total1)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-                JOptionPane.showMessageDialog(null, "3er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-                
-            }
-            if(total1==total3)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-            }
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2"  + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
+            JOptionPane.showMessageDialog(null, "2do lugar: jugador 1"  + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
         }
         
-        
-        else if(total3>total1 && total3>total2)
+        if(total1==total2)
         {
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-            if(total1>total2)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-                JOptionPane.showMessageDialog(null, "3er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-            }
-            if(total2>total1)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-                JOptionPane.showMessageDialog(null, "3er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-                
-            }
-            if(total1==total2)
-            {
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-                JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug2 + "  Total: Q" + total1);
-            }
-        }
-        
-        
-        else if(total1==total2 && total1!=total3 && total3!=total2)
-        {
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-            JOptionPane.showMessageDialog(null, "2do lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-        }
-        
-        else if(total1==total3 && total1!=total2 && total3!=total2)
-        {
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-            JOptionPane.showMessageDialog(null, "2do lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-        }
-        
-        else if(total3==total2 && total1!=total3 && total1!=total2)
-        {
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-            JOptionPane.showMessageDialog(null, "2do lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-        }
-        
-        else if(total1==total2 && total2==total3 && total1==total3)
-        {
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1" + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2" + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
-            JOptionPane.showMessageDialog(null, "1er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 1"  + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
+            JOptionPane.showMessageDialog(null, "1er lugar: jugador 2"  + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
         }
         
         
@@ -1798,7 +1183,7 @@ public class Movimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
-        Movimiento mov = new Movimiento();
+        Movimiento2 mov = new Movimiento2();
         mov.show();
         this.hide();// TODO add your handling code here:
     }//GEN-LAST:event_btnReiniciarActionPerformed
@@ -1871,36 +1256,6 @@ public class Movimiento extends javax.swing.JFrame {
     }
         
     
-        public void pasoderp3()
-    {
-        x3 = peon3.getX();
-        y3 = peon3.getY();
-        
-        peon3.setLocation(x3+110, y3);      
-    }
-        
-        public void pasoizqp3()
-    {
-        x3 = peon3.getX();
-        y3 = peon3.getY();
-        
-        peon3.setLocation(x3-110, y3);      
-    }
-        public void pasoarribap3()
-    {
-        x3 = peon3.getX();
-        y3 = peon3.getY();
-        
-        peon3.setLocation(x3, y3-110);      
-    }
-        public void pasoabajop3()
-    {
-        x3 = peon3.getX();
-        y3 = peon3.getY();
-        
-        peon3.setLocation(x3, y3+110);      
-    }
-        
         
     
         
@@ -1948,20 +1303,21 @@ public class Movimiento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Movimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Movimiento2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Movimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Movimiento2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Movimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Movimiento2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Movimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Movimiento2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Movimiento().setVisible(true);
+                new Movimiento2().setVisible(true);
             }
         });
     }
@@ -1972,19 +1328,14 @@ public class Movimiento extends javax.swing.JFrame {
     private javax.swing.JLabel dados;
     private javax.swing.JLabel lblJug1;
     private javax.swing.JLabel lblJug2;
-    private javax.swing.JLabel lblJug3;
     private javax.swing.JLabel peon1;
     private javax.swing.JLabel peon2;
-    private javax.swing.JLabel peon3;
     private javax.swing.JLabel peon4;
     private javax.swing.JLabel peon5;
-    private javax.swing.JLabel peon6;
     private javax.swing.JLabel tablero;
     private javax.swing.JButton tirar1;
     private javax.swing.JButton tirar2;
-    private javax.swing.JButton tirar3;
     private javax.swing.JTextField txtJug1;
     private javax.swing.JTextField txtJug2;
-    private javax.swing.JTextField txtJug3;
     // End of variables declaration//GEN-END:variables
 }

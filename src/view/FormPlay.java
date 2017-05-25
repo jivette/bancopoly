@@ -6,7 +6,9 @@
 package view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import juego.Movimiento;
+import juego.Movimiento2;
 //prueba
 /**
  *
@@ -106,9 +108,27 @@ public class FormPlay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Movimiento mov = new Movimiento();
-        mov.setVisible(true);
-        this.hide();
+
+        if(jTextField1.getText().contains("3"))
+        {
+            Movimiento mov = new Movimiento();
+            mov.setVisible(true);
+            this.hide();
+        }
+        
+        else if(jTextField1.getText().contains("2"))
+        {
+            Movimiento2 mov = new Movimiento2();
+            mov.setVisible(true);
+            this.hide();
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Unicamente puede jugarse con 2 o 3 jugadores, dijite nuevamente el numero de jugadores que desea");
+            jTextField1.setText("");
+        }
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
