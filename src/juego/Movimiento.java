@@ -696,10 +696,21 @@ public class Movimiento extends javax.swing.JFrame {
                txtJug1.setText("Q" + jug1);
                txtJug2.setText("Q" + jug2);
                txtJug3.setText("Q" + jug3);
-               tirar2.setVisible(true);
-               tirar2.setEnabled(true);
+               if(descanzo2==0)
+               {
+                tirar2.setVisible(true);
+                tirar2.setEnabled(true);
+               }
+               else 
+               {
+                tirar3.setVisible(true);
+                tirar3.setEnabled(true);
+                descanzo2=0;
+               }
+               
                tirar1.setEnabled(false);
                tirar1.setVisible(false);
+              
               }
         };
         
@@ -918,7 +929,7 @@ public class Movimiento extends javax.swing.JFrame {
                         } 
                         if(pos2 == 11 && casillas[11] == 0)
                         {
-                            //descanzo
+                            descanzo2 = 1;
                         } 
                         if(pos2 == 12 && casillas[12]== 0)
                         {
@@ -1173,8 +1184,20 @@ public class Movimiento extends javax.swing.JFrame {
                txtJug1.setText("Q" + jug1);
                txtJug2.setText("Q" + jug2);
                txtJug3.setText("Q" + jug3);
-               tirar3.setVisible(true);
-               tirar3.setEnabled(true);
+               
+               if(descanzo3==0)
+               {
+                tirar3.setVisible(true);
+                tirar3.setEnabled(true);
+               }
+               else 
+               {
+                tirar1.setVisible(true);
+                tirar1.setEnabled(true);
+                descanzo3=0;
+               }
+               
+         
                tirar2.setEnabled(false);
                tirar2.setVisible(false);
               }
@@ -1393,7 +1416,7 @@ public class Movimiento extends javax.swing.JFrame {
                         } 
                         if(pos3 == 11 && casillas[11] == 0)
                         {
-                            //descanzo
+                            descanzo3 = 1;
                         } 
                         if(pos3 == 12 && casillas[12]== 0)
                         {
@@ -1643,8 +1666,17 @@ public class Movimiento extends javax.swing.JFrame {
                txtJug1.setText("Q" + jug1);
                txtJug2.setText("Q" + jug2);
                txtJug3.setText("Q" + jug3);
-               tirar1.setVisible(true);
-               tirar1.setEnabled(true);
+               if(descanzo1==0)
+               {
+                tirar1.setVisible(true);
+                tirar1.setEnabled(true);
+               }
+               else
+               {
+                tirar2.setVisible(true);
+                tirar2.setEnabled(true);
+                descanzo1=0;
+               }
                tirar3.setEnabled(false);
                tirar3.setVisible(false);
               }
