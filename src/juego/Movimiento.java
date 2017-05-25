@@ -62,6 +62,9 @@ public class Movimiento extends javax.swing.JFrame {
     int propiedad2 = 0;
     int propiedad3 = 0;
     
+    int descanzo1 = 0;
+    int descanzo2 = 0;
+    int descanzo3 = 0;
     
     
     public Movimiento() {
@@ -101,7 +104,8 @@ public class Movimiento extends javax.swing.JFrame {
         peon4 = new javax.swing.JLabel();
         peon5 = new javax.swing.JLabel();
         peon6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
+        btnReiniciar = new javax.swing.JButton();
         tablero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,14 +190,23 @@ public class Movimiento extends javax.swing.JFrame {
         getContentPane().add(peon6);
         peon6.setBounds(280, 420, 70, 40);
 
-        jButton1.setText("FINALIZAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizar.setText("FINALIZAR");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFinalizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(520, 410, 130, 30);
+        getContentPane().add(btnFinalizar);
+        btnFinalizar.setBounds(520, 410, 130, 30);
+
+        btnReiniciar.setText("REINICIAR");
+        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReiniciar);
+        btnReiniciar.setBounds(520, 370, 130, 30);
 
         tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/juego/bancopoly.jpg"))); // NOI18N
         getContentPane().add(tablero);
@@ -236,6 +249,7 @@ public class Movimiento extends javax.swing.JFrame {
         //actualiza las posiciones del peon1
         x1 = peon1.getX();
         y1 = peon1.getY();
+        
         
         
         
@@ -427,7 +441,7 @@ public class Movimiento extends javax.swing.JFrame {
                         } 
                         if(pos1 == 11 && casillas[11] == 0)
                         {
-                            //descanzo
+                            descanzo1 = 1;
                         } 
                         if(pos1 == 12 && casillas[12]== 0)
                         {
@@ -500,8 +514,7 @@ public class Movimiento extends javax.swing.JFrame {
                         
                         if(pos1 == 16 && casillas[16]== 0)
                         {
-//                            JOptionPane.showMessageDialog(null, "Seleccione el Boton Cupon");  //cupon
-//                            btncupon.setEnabled(true);
+                          
                             int cupon = girar();
                             if(cupon==1)
                             {
@@ -1647,7 +1660,7 @@ public class Movimiento extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_tirar3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         double total1 = propiedad1 + jug1;
         double total2 = propiedad2 + jug2;
         double total3 = propiedad3 + jug3;
@@ -1655,7 +1668,7 @@ public class Movimiento extends javax.swing.JFrame {
         if(total1>total2 && total1>total3)
         {
             JOptionPane.showMessageDialog(null, "1er lugar: jugador 1"  + "  Valor en Propiedades: " + propiedad1 + "  Saldo: " + jug1 + "  Total: Q" + total1);
-            if(total2>=total3)
+            if(total2>total3)
             {
                 JOptionPane.showMessageDialog(null, "2do lugar: jugador 2"  + "  Valor en Propiedades: " + propiedad2 + "  Saldo: " + jug2 + "  Total: Q" + total2);
                 JOptionPane.showMessageDialog(null, "3er lugar: jugador 3" + "  Valor en Propiedades: " + propiedad3 + "  Saldo: " + jug3 + "  Total: Q" + total3);
@@ -1747,7 +1760,13 @@ public class Movimiento extends javax.swing.JFrame {
         
         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
+        Movimiento mov = new Movimiento();
+        mov.show();
+        this.hide();// TODO add your handling code here:
+    }//GEN-LAST:event_btnReiniciarActionPerformed
 
     
     
@@ -1913,8 +1932,9 @@ public class Movimiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalizar;
+    private javax.swing.JButton btnReiniciar;
     private javax.swing.JLabel dados;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblJug1;
     private javax.swing.JLabel lblJug2;
     private javax.swing.JLabel lblJug3;
