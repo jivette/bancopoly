@@ -30,7 +30,7 @@ public class Movimiento extends javax.swing.JFrame {
     //
     //este es el numero que devuelve el dado despues de haber sido girado
     static int numero = 0;
-    
+        
     //posicion x,y del peon 1 en el tablero
     int x1;
     int y1;
@@ -42,6 +42,11 @@ public class Movimiento extends javax.swing.JFrame {
     //posicion x,y del peon 3 en el tablero
     int x3;
     int y3;
+    
+    Jugador player1 = new Jugador();
+    Jugador player2 = new Jugador();
+    Jugador player3 = new Jugador();
+    
     
     //posiciones logicas de los peones contra el tablero, nos sirve para comparar contra las casillas 
     int pos1 = 0;
@@ -123,7 +128,7 @@ public class Movimiento extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dados);
-        dados.setBounds(230, 210, 170, 90);
+        dados.setBounds(240, 210, 170, 90);
 
         tirar1.setText("TIRAR PEON 1");
         tirar1.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +225,7 @@ public class Movimiento extends javax.swing.JFrame {
         x1 = peon1.getX();
         y1 = peon1.getY();
         System.out.println(peon1.getLocation());
-
+           
         switch(evt.getExtendedKeyCode())
         {
             case KeyEvent.VK_UP: peon1.setLocation(x1, y1-110); break;
@@ -270,43 +275,43 @@ public class Movimiento extends javax.swing.JFrame {
                 //validacion para avanzar deacuerdo a las casillas
                 for(int x = 1; numero>=x; x++)
                 {
-                        pos1 = pos1 + 1;
-                        if(pos1 <= 4)
+                        player1.pos = player1.pos + 1;
+                        if(player1.pos <= 4)
                         {
                         pasoarriba();
                         }
-                        if(pos1 > 4 && pos1 <=11)
+                        if(player1.pos> 4 && player1.pos <=11)
                         {
                         pasoder();
                         }
-                        if(pos1 >11 && pos1 <=15)
+                        if(player1.pos >11 && player1.pos <=15)
                         {
                         pasoabajo();
                         }
-                        if(pos1 >15 && pos1 <=22)
+                        if(player1.pos >15 && player1.pos <=22)
                         {
                         pasoizq();
-                            if(pos1 == 22)
+                            if(player1.pos == 22)
                             {
                                 //cuando de una vuelta completa se le asigna nuevamente 0 que es el inicio, y a su saldo se le suman 100 segun instrucciones del docto.
-                            pos1 = 0;
-                            jug1 = jug1 + 100;
+                            player1.pos = 0;
+                            player1.saldo = player1.saldo + 100;
                             }
                         }
                 }
                         //empieza la validacion de la posicion actual del peon contra el estado de las casillas
                         //validacion de posiciones contra el estado "banco/ no comprado"
                 
-                        if(pos1 == 1 && casillas[1] == 0)
+                        if(player1.pos == 1 && casillas[1] == 0)
                         {
-                            if(jug1>=130)
+                            if(player1.saldo>=130)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 130;
+                                    player1.saldo = player1.saldo - 130;
                                     casillas[1] = 1;
-                                    propiedad1 = propiedad1 + 130;
+                                    player1.propiedad = player1.propiedad + 130;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -314,16 +319,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos1 == 2 && casillas[2] == 0)
+                        if(player1.pos == 2 && casillas[2] == 0)
                         {
-                            if(jug1>=100)
+                            if(player1.saldo>=100)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 100;
+                                    player1.saldo = player1.saldo - 100;
                                     casillas[2] = 1;
-                                    propiedad1 = propiedad1 + 100;
+                                    player1.propiedad = player1.propiedad + 100;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -331,16 +336,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos1 == 3 && casillas[3] == 0)
+                        if(player1.pos == 3 && casillas[3] == 0)
                         {
-                            if(jug1>=90)
+                            if(player1.saldo>=90)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 90;
+                                    player1.saldo = player1.saldo - 90;
                                     casillas[3] = 1;
-                                    propiedad1 = propiedad1 + 90;
+                                    player1.propiedad = player1.propiedad + 90;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -349,16 +354,16 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos1 == 5 && casillas[5] == 0)
+                        if(player1.pos == 5 && casillas[5] == 0)
                         {
-                            if(jug1>=150)
+                            if(player1.saldo >=150)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 150;
+                                    player1.saldo = player1.pos - 150;
                                     casillas[5] = 1;
-                                    propiedad1 = propiedad1 + 150;
+                                    player1.propiedad = player1.propiedad + 150;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -366,16 +371,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }  
                             }
                         } 
-                        if(pos1 == 6 && casillas[6] == 0)
+                        if(player1.pos== 6 && casillas[6] == 0)
                         {
-                            if(jug1>=140)
+                            if(player1.saldo>=140)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 140;
+                                    player1.saldo = player1.saldo - 140;
                                     casillas[6] = 1;
-                                    propiedad1 = propiedad1 + 140;
+                                    player1.propiedad = player1.propiedad + 140;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -383,16 +388,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos1 == 7 && casillas[7] == 0)
+                        if(player1.pos == 7 && casillas[7] == 0)
                         {
-                            if(jug1>=50)
+                            if(player1.saldo>=50)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Peten por Q50.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 50;
+                                    player1.saldo = player1.saldo - 50;
                                     casillas[7]= 1;
-                                    propiedad1 = propiedad1 + 50;
+                                    player1.propiedad = player1.propiedad + 50;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -400,16 +405,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos1 == 8 && casillas[8] == 0)
+                        if(player1.pos == 8 && casillas[8] == 0)
                         {
-                            if(jug1>=190)
+                            if(player1.saldo>=190)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Fegua por Q190.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 190;
+                                    player1.saldo = player1.saldo - 190;
                                     casillas[8] = 1;
-                                    propiedad1 = propiedad1 + 190;
+                                    player1.propiedad = player1.propiedad + 190;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -417,16 +422,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos1 == 9 && casillas[9] == 0)
+                        if(player1.pos == 9 && casillas[9] == 0)
                         {
                             if(jug1>=170)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Solola por Q170.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 170;
+                                    player1.saldo = player1.saldo - 170;
                                     casillas[9]= 1;
-                                    propiedad1 = propiedad1 + 170;
+                                    player1.propiedad = player1.propiedad + 170;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -435,25 +440,25 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos1 == 10 && casillas[10]== 0)
+                        if(player1.pos == 10 && casillas[10]== 0)
                         {
-                            double impuesto = propiedad1 * 0.10;
-                            jug1 = jug1 - impuesto;
+                            double impuesto = player1.propiedad * 0.10;
+                            player1.saldo = player1.saldo - impuesto;
                         } 
                         if(pos1 == 11 && casillas[11] == 0)
                         {
-                            descanzo1 = 1;
+                            player1.descanzo = 1;
                         } 
-                        if(pos1 == 12 && casillas[12]== 0)
+                        if(player1.pos == 12 && casillas[12]== 0)
                         {
-                            if(jug1>=230)
+                            if(player1.saldo>=230)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar San Marcos por Q230.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 230;
+                                    player1.saldo = player1.saldo - 230;
                                     casillas[12] = 1;
-                                    propiedad1 = propiedad1 + 230;
+                                    player1.propiedad = player1.propiedad + 230;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -461,16 +466,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos1 == 13 && casillas[13] == 0)
+                        if(player1.pos == 13 && casillas[13] == 0)
                         {
-                            if(jug1>=250)
+                            if(player1.saldo>=250)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Baja Verapaz por Q250.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 250;
+                                    player1.saldo = player1.saldo - 250;
                                     casillas[13]= 1;
-                                    propiedad1 = propiedad1 + 250;
+                                    player1.propiedad = player1.propiedad + 250;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -478,16 +483,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }   
                             }
                         } 
-                        if(pos1 == 14 && casillas[14] == 0)
+                        if(player1.pos == 14 && casillas[14] == 0)
                         {
-                            if(jug1>=175)
+                            if(player1.saldo>=175)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Empagua por Q175.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 175;
+                                    player1.saldo = player1.saldo - 175;
                                     casillas[14] = 1;
-                                    propiedad1 = propiedad1 + 175;
+                                    player1.propiedad = player1.propiedad + 175;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -496,7 +501,7 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos1 == 15 && casillas[15] == 0)
+                        if(player1.pos == 15 && casillas[15] == 0)
                         {
                             pasoarriba();
                             pasoarriba();
@@ -509,18 +514,18 @@ public class Movimiento extends javax.swing.JFrame {
                             pasoizq();
                             pasoizq();
                             pasoizq();
-                            pos1 = 4;
-                            jug1 = jug1 - 100;
+                            player1.pos = 4;
+                            player1.saldo = player1.saldo - 100;
                         } 
                         
-                        if(pos1 == 16 && casillas[16]== 0)
+                        if(player1.pos == 16 && casillas[16]== 0)
                         {
                           
                             int cupon = girar();
                             if(cupon==1)
                             {
                                 JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q50 de peaje, ademas del peaje normal (si procede)");
-                                jug1 = jug1-50;
+                                player1.saldo = player1.saldo-50;
                                 pasoder();
                                 pasoarriba();
                                 pasoarriba();
@@ -531,22 +536,22 @@ public class Movimiento extends javax.swing.JFrame {
                                 pasoizq();
                                 pasoizq();
                                 pasoizq();
-                                pos1 = 6;
+                                player1.pos = 6;
                                 if(casillas[6]==2)
                                 {
-                                    jug1 = jug1-50;
-                                    jug2 = jug2+50;
+                                    player1.saldo = player1.saldo-50;
+                                    player2.saldo = player2.saldo+50;
                                 }
                                 if(casillas[6]==3)
                                 {
-                                    jug1 = jug1-50;
-                                    jug3 = jug3+50;
+                                    player1.saldo = player1.saldo-50;
+                                    player3.saldo = player3.saldo+50;
                                 }
                             }
                             if(cupon==2)
                             {
                                 JOptionPane.showMessageDialog(null, "Pague Q150 a la SAT por declaracion de impuestos");
-                                jug1 = jug1-150;
+                                player1.saldo = player1.saldo-150;
                             }
                             if(cupon == 3)
                             {
@@ -563,21 +568,21 @@ public class Movimiento extends javax.swing.JFrame {
                                 pasoizq();
                                 pasoizq();
                                 pasoizq();
-                                pos1 = 4;
-                                jug1 = jug1 - 100;
+                                player1.pos = 4;
+                                player1.saldo = player1.saldo - 100;
                             }
                             if(cupon ==4)
                             {
                                 JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de empagua, si procede");
                                 if(casillas[14]==2)
                                 {
-                                    jug1 = jug1-100;
-                                    jug2 = jug2+100;
+                                    player1.saldo = player1.saldo-100;
+                                    player2.saldo = player2.saldo+100;
                                 }
                                 if(casillas[14]==3)
                                 {
-                                    jug1 = jug1-100;
-                                    jug3 = jug3+100;
+                                    player1.saldo = player1.saldo-100;
+                                    player2.saldo = player2.saldo+100;
                                 }
                             
                             }
@@ -586,13 +591,13 @@ public class Movimiento extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de fegua, si procede");
                                 if(casillas[8]==2)
                                 {
-                                    jug1 = jug1-100;
-                                    jug2 = jug2+100;
+                                    player1.saldo = player1.saldo-100;
+                                    player2.saldo = player2.saldo+100;
                                 }
                                 if(casillas[8]==3)
                                 {
-                                    jug1 = jug1-100;
-                                    jug3 = jug3+100;
+                                    player1.saldo = player1.saldo-100;
+                                    player2.saldo = player2.saldo+100;
                                 }
                             
                             }
@@ -600,16 +605,16 @@ public class Movimiento extends javax.swing.JFrame {
                         } 
                         
                         
-                        if(pos1 == 17 && casillas[17]== 0)
+                        if(player1.pos == 17 && casillas[17]== 0)
                         {
-                            if(jug1>=310)
+                            if(player1.saldo>=310)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Santa Rosa por Q310.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 310;
+                                    player1.saldo = player1.saldo - 310;
                                     casillas[17] = 1;
-                                    propiedad1 = propiedad1 + 310;
+                                    player1.propiedad = player1.propiedad + 310;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -617,16 +622,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos1 == 18 && casillas[18]== 0)
+                        if(player1.pos == 18 && casillas[18]== 0)
                         {
-                            if(jug1>=270)
+                            if(player1.saldo>=270)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Zacapa por Q270.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 270;
+                                    player1.saldo = player1.saldo - 270;
                                     casillas[18] = 1;
-                                    propiedad1 = propiedad1 + 270;
+                                    player1.propiedad = player1.propiedad + 270;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -634,16 +639,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos1 == 19 && casillas[19]== 0)
+                        if(player1.pos == 19 && casillas[19]== 0)
                         {
-                            if(jug1>=250)
+                            if(player1.saldo>=250)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Guatemala por Q250.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 250;
+                                    player1.saldo = player1.saldo - 250;
                                     casillas[19] = 1;
-                                    propiedad1 = propiedad1 + 250;
+                                    player1.propiedad = player1.propiedad + 250;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -652,16 +657,16 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos1 == 20 && casillas[20]== 0)
+                        if(player1.pos == 20 && casillas[20]== 0)
                         {
-                            if(jug1>=390)
+                            if(player1.saldo>=390)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Jutiapa por Q390.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug1 = jug1 - 390;
+                                    player1.saldo = player1.saldo - 390;
                                     casillas[20] = 1;
-                                    propiedad1 = propiedad1 + 390;
+                                    player1.propiedad = player1.propiedad + 390;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -669,35 +674,35 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos1 == 21 && casillas[21] == 0)
+                        if(player1.pos == 21 && casillas[21] == 0)
                         {
-                            double impuesto = propiedad1 * 0.10;
-                            jug1 = jug1 - impuesto;
+                            double impuesto = player1.propiedad * 0.10;
+                            player1.saldo = player1.saldo - impuesto;
                         } 
                         
                           
                         for(int i = 1; i<=21; i++)
                         {
                             //validacion de posiciones contra el estado "jugador 2"
-                           if(pos1 == i && casillas[i] == 2)
+                           if(player1.pos == i && casillas[i] == 2)
                             {
-                                jug2 = jug2 + 50;
-                                jug1 = jug1 - 50;
+                                player2.saldo = player2.saldo + 50;
+                                player1.saldo = player1.saldo - 50;
                             } 
                            //validacion de posiciones contra el estado "jugador 3"
                            if(pos1 == i && casillas[i] == 3)
                             {
-                                jug3 = jug3 + 50;
-                                jug1 = jug1 - 50;
+                                player3.saldo = player3.saldo + 50;
+                                player1.saldo = player1.saldo - 50;
                             } 
                         
                         }
                
                
-               txtJug1.setText("Q" + jug1);
-               txtJug2.setText("Q" + jug2);
-               txtJug3.setText("Q" + jug3);
-               if(descanzo2==0)
+               txtJug1.setText("Q" + player1.saldo);
+               txtJug2.setText("Q" + player2.saldo);
+               txtJug3.setText("Q" + player3.saldo);
+               if(player2.descanzo==0)
                {
                 tirar2.setVisible(true);
                 tirar2.setEnabled(true);
@@ -706,7 +711,7 @@ public class Movimiento extends javax.swing.JFrame {
                {
                 tirar3.setVisible(true);
                 tirar3.setEnabled(true);
-                descanzo2=0;
+                player2.descanzo=0;
                }
                
                tirar1.setEnabled(false);
@@ -759,43 +764,43 @@ public class Movimiento extends javax.swing.JFrame {
                 //validacion para avanzar deacuerdo a las casillas
                 for(int x = 1; numero>=x; x++)
                 {
-                        pos2 = pos2 + 1;
-                        if(pos2 <= 4)
+                        player2.pos = player2.pos + 1;
+                        if(player2.pos <= 4)
                         {
                         pasoarribap2();
                         }
-                        if(pos2 > 4 && pos2 <=11)
+                        if(player2.pos> 4 && player2.pos <=11)
                         {
                         pasoderp2();
                         }
-                        if(pos2 >11 && pos2 <=15)
+                        if(player2.pos >11 && player2.pos <=15)
                         {
                         pasoabajop2();
                         }
-                        if(pos2 >15 && pos2 <=22)
+                        if(player2.pos >15 && player2.pos <=22)
                         {
                         pasoizqp2();
-                            if(pos2 == 22)
+                            if(player2.pos== 22)
                             {
                                 //cuando de una vuelta completa se le asigna nuevamente 0 que es el inicio, y a su saldo se le suman 100 segun instrucciones del docto.
-                            pos2 = 0;
-                            jug2 = jug2 + 100;
+                            player2.pos = 0;
+                            player2.saldo = player2.saldo + 100;
                             }
                         }
                 }
                         //empieza la validacion de la posicion actual del peon contra el estado de las casillas
                         //validacion de posiciones contra el estado "banco/ no comprado"
                 
-                        if(pos2 == 1 && casillas[1] == 0)
+                        if(player2.pos == 1 && casillas[1] == 0)
                         {
-                            if(jug2>=130)
+                            if(player2.pos>=130)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 130;
+                                    player2.saldo = player2.saldo - 130;
                                     casillas[1] = 2;
-                                    propiedad2 = propiedad2 + 130;
+                                    player2.propiedad = player2.propiedad + 130;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -803,16 +808,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos2 == 2 && casillas[2] == 0)
+                        if(player2.pos == 2 && casillas[2] == 0)
                         {
-                            if(jug2>=100)
+                            if(player2.saldo>=100)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 100;
+                                    player2.saldo = player2.saldo - 100;
                                     casillas[2] = 2;
-                                    propiedad2 = propiedad2 + 100;
+                                    player2.propiedad = player2.propiedad + 100;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -820,16 +825,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos2 == 3 && casillas[3] == 0)
+                        if(player2.pos == 3 && casillas[3] == 0)
                         {
-                            if(jug2>=90)
+                            if(player2.saldo>=90)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 90;
+                                    player2.saldo = player2.saldo - 90;
                                     casillas[3] = 2;
-                                    propiedad2 = propiedad2 + 90;
+                                    player2.propiedad = player2.propiedad + 90;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -838,16 +843,16 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos2 == 5 && casillas[5] == 0)
+                        if(player2.pos == 5 && casillas[5] == 0)
                         {
-                            if(jug2>=150)
+                            if(player2.saldo>=150)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 150;
+                                    player2.saldo= player2.saldo - 150;
                                     casillas[5] = 2;
-                                    propiedad2 = propiedad2 + 150;
+                                    player2.propiedad = player2.propiedad + 150;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -855,16 +860,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }  
                             }
                         } 
-                        if(pos2 == 6 && casillas[6] == 0)
+                        if(player2.pos == 6 && casillas[6] == 0)
                         {
-                            if(jug2>=140)
+                            if(player2.saldo>=140)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 140;
+                                    player2.saldo = player2.saldo - 140;
                                     casillas[6] = 2;
-                                    propiedad2 = propiedad2 + 140;
+                                    player2.propiedad = player2.propiedad + 140;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -872,16 +877,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos2 == 7 && casillas[7] == 0)
+                        if(player2.pos == 7 && casillas[7] == 0)
                         {
-                            if(jug2>=50)
+                            if(player2.saldo>=50)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Peten por Q50.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 50;
+                                    player2.saldo= player2.saldo - 50;
                                     casillas[7]= 2;
-                                    propiedad2 = propiedad2 + 50;
+                                    player2.propiedad = player2.propiedad + 50;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -889,16 +894,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos2 == 8 && casillas[8] == 0)
+                        if(player2.pos == 8 && casillas[8] == 0)
                         {
-                            if(jug2>=190)
+                            if(player2.saldo>=190)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Fegua por Q190.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 190;
+                                    player2.saldo = player2.saldo - 190;
                                     casillas[8] = 2;
-                                    propiedad2 = propiedad2 + 190;
+                                    player2.propiedad = player2.propiedad + 190;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -906,16 +911,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos2 == 9 && casillas[9] == 0)
+                        if(player2.pos == 9 && casillas[9] == 0)
                         {
-                            if(jug2>=170)
+                            if(player2.saldo>=170)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Solola por Q170.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 170;
+                                    player2.saldo = player2.saldo - 170;
                                     casillas[9]= 2;
-                                    propiedad2 = propiedad2 + 170;
+                                    player2.propiedad = player2.propiedad + 170;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -924,25 +929,25 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos2 == 10 && casillas[10]== 0)
+                        if(player2.pos == 10 && casillas[10]== 0)
                         {
-                            double impuesto = propiedad2 * 0.10;
-                            jug2 = jug2 - impuesto;
+                            double impuesto = player2.propiedad * 0.10;
+                            player2.saldo = player2.saldo - impuesto;
                         } 
-                        if(pos2 == 11 && casillas[11] == 0)
+                        if(player2.pos == 11 && casillas[11] == 0)
                         {
-                            descanzo2 = 1;
+                            player2.descanzo = 1;
                         } 
-                        if(pos2 == 12 && casillas[12]== 0)
+                        if(player2.pos == 12 && casillas[12]== 0)
                         {
-                            if(jug2>=230)
+                            if(player2.saldo>=230)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar San Marcos por Q230.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 230;
+                                    player2.saldo = player2.saldo - 230;
                                     casillas[12] = 2;
-                                    propiedad2 = propiedad2 + 230;
+                                    player2.propiedad = player2.propiedad + 230;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -950,16 +955,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos2 == 13 && casillas[13] == 0)
+                        if(player2.pos == 13 && casillas[13] == 0)
                         {
-                            if(jug2>=250)
+                            if(player2.saldo>=250)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Baja Verapaz por Q250.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 250;
+                                    player2.saldo = player2.saldo - 250;
                                     casillas[13]= 2;
-                                    propiedad2 = propiedad2 + 250;
+                                    player2.propiedad = player2.propiedad + 250;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -967,16 +972,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }   
                             }
                         } 
-                        if(pos2 == 14 && casillas[14] == 0)
+                        if(player2.pos == 14 && casillas[14] == 0)
                         {
-                            if(jug2>=175)
+                            if(player2.saldo>=175)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Empagua por Q175.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 175;
+                                    player2.saldo = player2.saldo - 175;
                                     casillas[14] = 2;
-                                    propiedad2 = propiedad2 + 175;
+                                    player2.propiedad = player2.propiedad + 175;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -985,7 +990,7 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos2 == 15 && casillas[15] == 0)
+                        if(player2.pos == 15 && casillas[15] == 0)
                         {
                             pasoarribap2();
                             pasoarribap2();
@@ -998,17 +1003,17 @@ public class Movimiento extends javax.swing.JFrame {
                             pasoizqp2();
                             pasoizqp2();
                             pasoizqp2();
-                            pos2 = 4;
-                            jug2 = jug2 - 100;
+                            player2.pos = 4;
+                            player2.saldo = player2.saldo - 100;
                         } 
                         
-                        if(pos2 == 16 && casillas[16]== 0)
+                        if(player2.pos == 16 && casillas[16]== 0)
                         {
                            int cupon = girar();
                             if(cupon==1)
                             {
                                 JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q50 de peaje, ademas del peaje normal (si procede)");
-                                jug2 = jug2-50;
+                                player2.saldo = player2.saldo-50;
                                 pasoderp2();
                                 pasoarribap2();
                                 pasoarribap2();
@@ -1019,22 +1024,22 @@ public class Movimiento extends javax.swing.JFrame {
                                 pasoizqp2();
                                 pasoizqp2();
                                 pasoizqp2();
-                                pos2 = 6;
+                                player2.pos = 6;
                                 if(casillas[6]==1)
                                 {
-                                    jug1 = jug1+50;
-                                    jug2 = jug2-50;
+                                    player1.saldo = player1.saldo+50;
+                                    player2.saldo = player2.saldo-50;
                                 }
                                 if(casillas[6]==3)
                                 {
-                                    jug2 = jug2-50;
-                                    jug3 = jug3+50;
+                                    player2.saldo = player2.saldo-50;
+                                    player3.saldo = player3.saldo+50;
                                 }
                             }
                             if(cupon==2)
                             {
                                 JOptionPane.showMessageDialog(null, "Pague Q150 a la SAT por declaracion de impuestos");
-                                jug2 = jug2-150;
+                                player2.saldo = player2.saldo-150;
                             }
                             if(cupon == 3)
                             {
@@ -1051,21 +1056,21 @@ public class Movimiento extends javax.swing.JFrame {
                                 pasoizqp2();
                                 pasoizqp2();
                                 pasoizqp2();
-                                pos2 = 4;
-                                jug2 = jug2 - 100;
+                                player2.pos = 4;
+                                player2.saldo = player2.saldo - 100;
                             }
                             if(cupon ==4)
                             {
                                 JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de empagua, si procede");
                                 if(casillas[14]==1)
                                 {
-                                    jug1 = jug1+100;
-                                    jug2 = jug2-100;
+                                    player1.saldo = player1.saldo+100;
+                                    player2.saldo = player2.saldo-100;
                                 }
                                 if(casillas[14]==3)
                                 {
-                                    jug2 = jug2-100;
-                                    jug3 = jug3+100;
+                                    player2.saldo= player2.saldo-100;
+                                    player3.saldo = player3.saldo+100;
                                 }
                             
                             }
@@ -1074,13 +1079,13 @@ public class Movimiento extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de fegua, si procede");
                                 if(casillas[14]==1)
                                 {
-                                    jug1 = jug1+100;
-                                    jug2 = jug2-100;
+                                    player1.saldo = player1.saldo+100;
+                                    player2.saldo = player2.saldo-100;
                                 }
                                 if(casillas[14]==3)
                                 {
-                                    jug2 = jug2-100;
-                                    jug3 = jug3+100;
+                                    player2.saldo= player2.saldo-100;
+                                    player3.saldo = player3.saldo+100;
                                 }
                             
                             }
@@ -1089,16 +1094,16 @@ public class Movimiento extends javax.swing.JFrame {
                         
                         
                         
-                        if(pos2 == 17 && casillas[17]== 0)
+                        if(player2.pos == 17 && casillas[17]== 0)
                         {
-                            if(jug2>=310)
+                            if(player2.saldo>=310)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Santa Rosa por Q310.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 310;
+                                    player2.saldo = player2.saldo - 310;
                                     casillas[17] = 2;
-                                    propiedad2 = propiedad2 + 310;
+                                    player2.propiedad = player2.propiedad + 310;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1106,16 +1111,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos2 == 18 && casillas[18]== 0)
+                        if(player2.pos == 18 && casillas[18]== 0)
                         {
-                            if(jug2>=270)
+                            if(player2.saldo>=270)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Zacapa por Q270.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 270;
+                                    player2.saldo = player2.saldo - 270;
                                     casillas[18] = 2;
-                                    propiedad2 = propiedad2 + 270;
+                                    player2.propiedad = player2.propiedad + 270;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1123,16 +1128,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos2 == 19 && casillas[19]== 0)
+                        if(player2.pos == 19 && casillas[19]== 0)
                         {
-                            if(jug2>=250)
+                            if(player2.saldo>=250)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Guatemala por Q250.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 250;
+                                    player2.saldo = player2.saldo - 250;
                                     casillas[19] = 2;
-                                    propiedad2 = propiedad2 + 250;
+                                    player2.propiedad = player2.propiedad + 250;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1141,16 +1146,16 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos2 == 20 && casillas[20]== 0)
+                        if(player2.pos == 20 && casillas[20]== 0)
                         {
-                            if(jug2>=390)
+                            if(player2.saldo>=390)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Jutiapa por Q390.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug2 = jug2 - 390;
+                                    player2.saldo = player2.saldo - 390;
                                     casillas[20] = 2;
-                                    propiedad2 = propiedad2 + 390;
+                                    player2.propiedad = player2.propiedad + 390;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1158,36 +1163,36 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos2 == 21 && casillas[21] == 0)
+                        if(player2.pos == 21 && casillas[21] == 0)
                         {
-                            double impuesto = propiedad2 * 0.10;
-                            jug2 = jug2 - impuesto;
+                            double impuesto = player2.propiedad * 0.10;
+                            player2.saldo = player2.saldo - impuesto;
                         } 
                         
                           
                         for(int i = 1; i<=21; i++)
                         {
                             //validacion de posiciones contra el estado "jugador 2"
-                           if(pos2 == i && casillas[i] == 1)
+                           if(player2.pos == i && casillas[i] == 1)
                             {
-                                jug1 = jug1 + 50;
-                                jug2 = jug2 - 50;
+                                player1.saldo = player1.saldo + 50;
+                                player2.saldo = player2.saldo - 50;
                             } 
                            //validacion de posiciones contra el estado "jugador 3"
                            if(pos1 == i && casillas[i] == 3)
                             {
-                                jug3 = jug3 + 50;
-                                jug2 = jug2 - 50;
+                                player3.saldo = player3.saldo + 50;
+                                player2.saldo = player2.saldo - 50;
                             } 
                         
                         }
                
                
-               txtJug1.setText("Q" + jug1);
-               txtJug2.setText("Q" + jug2);
-               txtJug3.setText("Q" + jug3);
+               txtJug1.setText("Q" + player1.saldo);
+               txtJug2.setText("Q" + player2.saldo);
+               txtJug3.setText("Q" + player3.saldo);
                
-               if(descanzo3==0)
+               if(player3.descanzo==0)
                {
                 tirar3.setVisible(true);
                 tirar3.setEnabled(true);
@@ -1196,7 +1201,7 @@ public class Movimiento extends javax.swing.JFrame {
                {
                 tirar1.setVisible(true);
                 tirar1.setEnabled(true);
-                descanzo3=0;
+                player3.descanzo=0;
                }
                
          
@@ -1247,43 +1252,43 @@ public class Movimiento extends javax.swing.JFrame {
                 //validacion para avanzar deacuerdo a las casillas
                 for(int x = 1; numero>=x; x++)
                 {
-                        pos3 = pos3 + 1;
-                        if(pos3 <= 4)
+                        player3.pos = player3.pos + 1;
+                        if(player3.pos <= 4)
                         {
                         pasoarribap3();
                         }
-                        if(pos3 > 4 && pos3 <=11)
+                        if(player3.pos > 4 && player3.pos <=11)
                         {
                         pasoderp3();
                         }
-                        if(pos3 >11 && pos3 <=15)
+                        if(player3.pos >11 && player3.pos <=15)
                         {
                         pasoabajop3();
                         }
-                        if(pos3 >15 && pos3 <=22)
+                        if(player3.pos >15 && player3.pos <=22)
                         {
                         pasoizqp3();
-                            if(pos3 == 22)
+                            if(player3.pos == 22)
                             {
                                 //cuando de una vuelta completa se le asigna nuevamente 0 que es el inicio, y a su saldo se le suman 100 segun instrucciones del docto.
-                            pos3 = 0;
-                            jug3 = jug3 + 100;
+                            player3.pos = 0;
+                            player3.saldo = player3.saldo + 100;
                             }
                         }
                 }
                         //empieza la validacion de la posicion actual del peon contra el estado de las casillas
                         //validacion de posiciones contra el estado "banco/ no comprado"
                 
-                        if(pos3 == 1 && casillas[1] == 0)
+                        if(player3.pos == 1 && casillas[1] == 0)
                         {
-                            if(jug3>=130)
+                            if(player3.saldo>=130)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Huehuetenango por Q130.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 130;
+                                    player3.saldo = player3.saldo - 130;
                                     casillas[1] = 3;
-                                    propiedad3 = propiedad3 + 130;
+                                    player3.propiedad = player3.propiedad + 130;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1291,16 +1296,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos3 == 2 && casillas[2] == 0)
+                        if(player3.pos == 2 && casillas[2] == 0)
                         {
-                            if(jug3>=100)
+                            if(player3.saldo>=100)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quetzaltenango por Q100.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 100;
+                                    player3.saldo = player3.saldo - 100;
                                     casillas[2] = 3;
-                                    propiedad3 = propiedad3 + 100;
+                                    player3.propiedad = player3.propiedad + 100;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1308,16 +1313,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos3 == 3 && casillas[3] == 0)
+                        if(player3.pos == 3 && casillas[3] == 0)
                         {
-                            if(jug3>=90)
+                            if(player3.saldo>=90)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Alta Verapaz por Q90.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 90;
+                                    player3.saldo = player3.saldo - 90;
                                     casillas[3] = 3;
-                                    propiedad3 = propiedad3 + 90;
+                                    player3.propiedad = player3.propiedad + 90;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1326,16 +1331,16 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos3 == 5 && casillas[5] == 0)
+                        if(player3.pos == 5 && casillas[5] == 0)
                         {
-                            if(jug3>=150)
+                            if(player3.saldo>=150)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Quiche por Q150.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 150;
+                                    player3.saldo = player3.saldo - 150;
                                     casillas[5] = 3;
-                                    propiedad3 = propiedad3 + 150;
+                                    player3.propiedad = player3.propiedad + 150;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1343,16 +1348,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }  
                             }
                         } 
-                        if(pos3 == 6 && casillas[6] == 0)
+                        if(player3.pos == 6 && casillas[6] == 0)
                         {
-                            if(jug3>=140)
+                            if(player3.saldo>=140)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Izabal por Q140.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 140;
+                                    player3.saldo = player3.saldo - 140;
                                     casillas[6] = 3;
-                                    propiedad3 = propiedad3 + 140;
+                                    player3.propiedad = player3.propiedad + 140;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1360,16 +1365,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos3 == 7 && casillas[7] == 0)
+                        if(player3.pos == 7 && casillas[7] == 0)
                         {
-                            if(jug3>=50)
+                            if(player3.saldo>=50)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Peten por Q50.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 50;
+                                    player3.saldo = player3.saldo - 50;
                                     casillas[7]= 3;
-                                    propiedad3 = propiedad3 + 50;
+                                    player3.propiedad = player3.propiedad + 50;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1377,16 +1382,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos3 == 8 && casillas[8] == 0)
+                        if(player3.pos == 8 && casillas[8] == 0)
                         {
-                            if(jug3>=190)
+                            if(player3.saldo>=190)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Fegua por Q190.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 190;
+                                    player3.saldo = player3.saldo - 190;
                                     casillas[8] = 3;
-                                    propiedad3 = propiedad3 + 190;
+                                    player3.propiedad = player3.propiedad + 190;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1394,16 +1399,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos3 == 9 && casillas[9] == 0)
+                        if(player3.pos == 9 && casillas[9] == 0)
                         {
-                            if(jug3>=170)
+                            if(player3.saldo>=170)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Solola por Q170.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 170;
+                                    player3.saldo = player3.saldo - 170;
                                     casillas[9]= 3;
-                                    propiedad3 = propiedad3 + 170;
+                                    player3.propiedad = player3.propiedad + 170;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1412,25 +1417,25 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos3 == 10 && casillas[10]== 0)
+                        if(player3.pos == 10 && casillas[10]== 0)
                         {
-                            double impuesto = propiedad3 * 0.10;
-                            jug3 = jug3 - impuesto;
+                            double impuesto = player3.propiedad * 0.10;
+                            player3.saldo = player3.saldo - impuesto;
                         } 
-                        if(pos3 == 11 && casillas[11] == 0)
+                        if(player3.pos == 11 && casillas[11] == 0)
                         {
-                            descanzo3 = 1;
+                            player3.descanzo = 1;
                         } 
-                        if(pos3 == 12 && casillas[12]== 0)
+                        if(player3.pos == 12 && casillas[12]== 0)
                         {
-                            if(jug3>=230)
+                            if(player3.saldo>=230)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar San Marcos por Q230.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 230;
+                                    player3.saldo = player3.saldo - 230;
                                     casillas[12] = 3;
-                                    propiedad3 = propiedad3 + 230;
+                                    player3.propiedad = player3.propiedad + 230;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1438,16 +1443,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos3 == 13 && casillas[13] == 0)
+                        if(player3.pos == 13 && casillas[13] == 0)
                         {
-                            if(jug3>=250)
+                            if(player3.saldo>=250)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Baja Verapaz por Q250.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 250;
+                                    player3.saldo = player3.saldo - 250;
                                     casillas[13]= 3;
-                                    propiedad3 = propiedad3 + 250;
+                                    player3.propiedad = player3.propiedad + 250;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1455,16 +1460,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }   
                             }
                         } 
-                        if(pos3 == 14 && casillas[14] == 0)
+                        if(player3.pos == 14 && casillas[14] == 0)
                         {
-                            if(jug3>=175)
+                            if(player3.saldo>=175)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Empagua por Q175.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 175;
+                                    player3.saldo = player3.saldo - 175;
                                     casillas[14] = 3;
-                                    propiedad3 = propiedad3 + 175;
+                                    player3.propiedad = player3.propiedad + 175;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1473,7 +1478,7 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos3 == 15 && casillas[15] == 0)
+                        if(player3.pos == 15 && casillas[15] == 0)
                         {
                             pasoarribap3();
                             pasoarribap3();
@@ -1486,16 +1491,16 @@ public class Movimiento extends javax.swing.JFrame {
                             pasoizqp3();
                             pasoizqp3();
                             pasoizqp3();
-                            pos3 = 4;
-                            jug3 = jug3 - 100;
+                            player3.pos = 4;
+                            player3.saldo = player3.saldo - 100;
                         } 
-                        if(pos3 == 16 && casillas[16]== 0)
+                        if(player3.pos == 16 && casillas[16]== 0)
                         {
                             int cupon = girar();
                             if(cupon==1)
                             {
                                 JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q50 de peaje, ademas del peaje normal (si procede)");
-                                jug3 = jug3-50;
+                                player3.saldo = player3.saldo-50;
                                 pasoderp3();
                                 pasoarribap3();
                                 pasoarribap3();
@@ -1506,22 +1511,22 @@ public class Movimiento extends javax.swing.JFrame {
                                 pasoizqp3();
                                 pasoizqp3();
                                 pasoizqp3();
-                                pos3 = 6;
+                                player3.pos = 6;
                                 if(casillas[6]==1)
                                 {
-                                    jug1 = jug1+50;
-                                    jug3 = jug3-50;
+                                    player1.saldo = player1.saldo+50;
+                                    player3.saldo = player3.saldo-50;
                                 }
                                 if(casillas[6]==2)
                                 {
-                                    jug2 = jug2+50;
-                                    jug3 = jug3-50;
+                                    player2.saldo = player2.saldo+50;
+                                    player3.saldo = player3.saldo-50;
                                 }
                             }
                             if(cupon==2)
                             {
                                 JOptionPane.showMessageDialog(null, "Pague Q150 a la SAT por declaracion de impuestos");
-                                jug3 = jug3-150;
+                                player3.saldo = player3.saldo-150;
                             }
                             if(cupon == 3)
                             {
@@ -1538,21 +1543,21 @@ public class Movimiento extends javax.swing.JFrame {
                                 pasoizqp3();
                                 pasoizqp3();
                                 pasoizqp3();
-                                pos3 = 4;
-                                jug3 = jug3 - 100;
+                                player3.pos = 4;
+                                player3.saldo = player3.saldo - 100;
                             }
                             if(cupon ==4)
                             {
                                 JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de empagua, si procede");
                                 if(casillas[14]==1)
                                 {
-                                    jug1 = jug1+100;
-                                    jug3 = jug3-100;
+                                    player1.saldo = player1.saldo+100;
+                                    player3.saldo = player3.saldo-100;
                                 }
                                 if(casillas[14]==2)
                                 {
-                                    jug3 = jug3-100;
-                                    jug2 = jug2+100;
+                                    player2.saldo = player2.saldo+100;
+                                    player3.saldo = player3.saldo-100;
                                 }
                             
                             }
@@ -1561,27 +1566,27 @@ public class Movimiento extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "Pague Q100 al dueño de fegua, si procede");
                                 if(casillas[14]==1)
                                 {
-                                    jug1 = jug1+100;
-                                    jug3 = jug3-100;
+                                    player1.saldo = player1.saldo+100;
+                                    player3.saldo = player3.saldo-100;
                                 }
                                 if(casillas[14]==2)
                                 {
-                                    jug2 = jug2+100;
-                                    jug3 = jug3-100;
+                                    player2.saldo = player2.saldo+100;
+                                    player3.saldo = player3.saldo-100;
                                 }
                             
                             }
                         } 
-                        if(pos3 == 17 && casillas[17]== 0)
+                        if(player3.pos == 17 && casillas[17]== 0)
                         {
-                            if(jug3>=310)
+                            if(player3.saldo>=310)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Santa Rosa por Q310.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 310;
+                                    player3.saldo = player3.saldo - 310;
                                     casillas[17] = 3;
-                                    propiedad3 = propiedad3 + 310;
+                                    player3.propiedad = player3.propiedad + 310;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1589,16 +1594,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos3 == 18 && casillas[18]== 0)
+                        if(player3.pos == 18 && casillas[18]== 0)
                         {
-                            if(jug3>=270)
+                            if(player3.saldo>=270)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Zacapa por Q270.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 270;
+                                    player3.saldo = player3.saldo - 270;
                                     casillas[18] = 3;
-                                    propiedad3 = propiedad3 + 270;
+                                    player3.propiedad = player3.propiedad + 270;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1606,16 +1611,16 @@ public class Movimiento extends javax.swing.JFrame {
                                 } 
                             }
                         } 
-                        if(pos3 == 19 && casillas[19]== 0)
+                        if(player3.pos == 19 && casillas[19]== 0)
                         {
-                            if(jug3>=250)
+                            if(player3.saldo>=250)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Guatemala por Q250.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 250;
+                                    player3.saldo= player3.saldo - 250;
                                     casillas[19] = 3;
-                                    propiedad3 = propiedad3 + 250;
+                                    player3.propiedad = player3.propiedad + 250;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1624,16 +1629,16 @@ public class Movimiento extends javax.swing.JFrame {
                             }
                         } 
                         
-                        if(pos3 == 20 && casillas[20]== 0)
+                        if(player3.pos == 20 && casillas[20]== 0)
                         {
-                            if(jug3>=390)
+                            if(player3.saldo>=390)
                             {
                                 int ax = JOptionPane.showConfirmDialog(null, "Deseas Comprar Jutiapa por Q390.00");
                                 if(ax == JOptionPane.YES_OPTION)
                                 {
-                                    jug3 = jug3 - 390;
+                                    player3.saldo = player3.saldo - 390;
                                     casillas[20] = 3;
-                                    propiedad3 = propiedad3 + 390;
+                                    player3.propiedad = player3.propiedad + 390;
                                 }
                                 else if(ax == JOptionPane.NO_OPTION)
                                 {
@@ -1641,35 +1646,35 @@ public class Movimiento extends javax.swing.JFrame {
                                 }
                             }
                         } 
-                        if(pos3 == 21 && casillas[21] == 0)
+                        if(player3.pos == 21 && casillas[21] == 0)
                         {
-                            double impuesto = propiedad3 * 0.10;
-                            jug3 = jug3 - impuesto;
+                            double impuesto = player3.propiedad * 0.10;
+                            player3.saldo = player3.saldo - impuesto;
                         } 
                         
                           
                         for(int i = 1; i<=21; i++)
                         {
                             //validacion de posiciones contra el estado "jugador 2"
-                           if(pos3 == i && casillas[i] == 2)
+                           if(player3.pos == i && casillas[i] == 2)
                             {
-                                jug2 = jug2 + 50;
-                                jug3 = jug3 - 50;
+                                player2.saldo = player2.saldo + 50;
+                                player3.saldo = player3.saldo - 50;
                             } 
                            //validacion de posiciones contra el estado "jugador 3"
-                           if(pos3 == i && casillas[i] == 1)
+                           if(player3.pos == i && casillas[i] == 1)
                             {
-                                jug1 = jug1 + 50;
-                                jug3 = jug3 - 50;
+                                player1.saldo = player1.saldo + 50;
+                                player3.saldo = player3.saldo - 50;
                             } 
                         
                         }
                
                
-               txtJug1.setText("Q" + jug1);
-               txtJug2.setText("Q" + jug2);
-               txtJug3.setText("Q" + jug3);
-               if(descanzo1==0)
+               txtJug1.setText("Q" + player1.saldo);
+               txtJug2.setText("Q" + player2.saldo);
+               txtJug3.setText("Q" + player3.saldo);
+               if(player1.descanzo==0)
                {
                 tirar1.setVisible(true);
                 tirar1.setEnabled(true);
@@ -1678,7 +1683,7 @@ public class Movimiento extends javax.swing.JFrame {
                {
                 tirar2.setVisible(true);
                 tirar2.setEnabled(true);
-                descanzo1=0;
+                player1.descanzo=0;
                }
                tirar3.setEnabled(false);
                tirar3.setVisible(false);
@@ -1696,6 +1701,15 @@ public class Movimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_tirar3ActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        propiedad1 = player1.propiedad;
+        propiedad2 = player2.propiedad;
+        propiedad3 = player3.propiedad;
+        
+        jug1 = player1.saldo;
+        jug2 = player2.saldo;
+        jug3 = player3.saldo;
+        
+        
         double total1 = propiedad1 + jug1;
         double total2 = propiedad2 + jug2;
         double total3 = propiedad3 + jug3;

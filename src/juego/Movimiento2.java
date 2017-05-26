@@ -1140,7 +1140,7 @@ public class Movimiento2 extends javax.swing.JFrame {
                 tirar1.setEnabled(false);
                 tirar2.setEnabled(true);
                 tirar2.setVisible(true);
-                descanzo2=0;
+                descanzo1=0;
                }
                
                
